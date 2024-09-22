@@ -11,7 +11,7 @@ This project is a Django-based web application that facilitates the online purch
 - [License](#license)
 
 ## Introduction
-RxPress aims to create a medicine online platform designed for convenience for purchasing medication products. It connects customers with pharmacies, allowing them to place orders online, while pharmacies can manage their stock and track orders through the system. It also covers the entire lifecycle of medicine transactions, from browsing and selecting products to payment processing. It includes functionalities for users to browse and order medicines, view their order history, and manage their accounts.
+**RxPress** aims to create a medicine online platform designed for convenience for purchasing medication products. It connects customers with pharmacies, allowing them to place orders online, while pharmacies can manage their stock and track orders through the system. It also covers the entire lifecycle of medicine transactions, from browsing and selecting products to payment processing. It includes functionalities for users to browse and order medicines, view their order history, and manage their accounts.
 
 ## Features
 1. **User Registration and Authentication:** Users can create an account and login.
