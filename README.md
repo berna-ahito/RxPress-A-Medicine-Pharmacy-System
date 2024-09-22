@@ -38,9 +38,9 @@ The design and layout of the user interface can be explored via the Figma link b
 [UI/UX Design](https://www.figma.com/design/hclbwOZiAfHJtQUMpU0ufz/CSIT284---UI%2FUX?node-id=0-1&t=obRXPnsg7D4mSdYi-1)
 
 ## Contributors
-Bernadeth Claire G. Ahito
-Juvie R. Coca
-Kiana Marquisa S. Del Mar
+* Bernadeth Claire G. Ahito
+* Juvie R. Coca
+* Kiana Marquisa S. Del Mar
 
 ## License
 The license for my project.
