@@ -14,7 +14,7 @@ RxPress is an easy-to-use platform for managing your pharmacy's medicine supply.
 RxPress aims to create a medicine online platform designed for convenience for purchasing medication products. It connects customers with pharmacies, allowing them to place orders online, while pharmacies can manage their stock and track orders through the system. It also covers the entire lifecycle of medicine transactions, from browsing and selecting products to payment processing. It includes functionalities for users to browse and order medicines, view their order history, and manage their accounts.
 
 ## Features
-1. User Registration and Authentication: Users can create an account and login.
+1. **User Registration and Authentication:** Users can create an account and login.
 2. Profile Management: Users can edit their account details such as can change name, email, and password.
 3. Order Management: Users can track the status of the orders such as can view past orders and reorder products.
 4. Shopping Cart and Checkout Process: Users can add to cart and check out. Customers can add, remove, or update product in cart.
