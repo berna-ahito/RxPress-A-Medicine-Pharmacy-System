@@ -15,12 +15,12 @@ RxPress aims to create a medicine online platform designed for convenience for p
 
 ## Features
 1. **User Registration and Authentication:** Users can create an account and login.
-2. Profile Management: Users can edit their account details such as can change name, email, and password.
-3. Order Management: Users can track the status of the orders such as can view past orders and reorder products.
-4. Shopping Cart and Checkout Process: Users can add to cart and check out. Customers can add, remove, or update product in cart.
-5. Payment Processing: Secure the financial transactions, secure the payment information, multiple payment.
-6. Medicine Catalog: Users can view detailed information about each medicine, including name, description, price, and stock status.
-7. Inventory Management: Allows administrators to manage the stock of medicines in the system. Administrators can add new medicines to the inventory, can update the stock levels of existing medicines and can remove medicines from the catalog
+2. **Profile Management:** Users can edit their account details such as can change name, email, and password.
+3. **Order Management:** Users can track the status of the orders such as can view past orders and reorder products.
+4. **Shopping Cart and Checkout Process:** Users can add to cart and check out. Customers can add, remove, or update product in cart.
+5. **Payment Processing:** Secure the financial transactions, secure the payment information, multiple payment.
+6. **Medicine Catalog:** Users can view detailed information about each medicine, including name, description, price, and stock status.
+7. **Inventory Management:** Allows administrators to manage the stock of medicines in the system. Administrators can add new medicines to the inventory, can update the stock levels of existing medicines and can remove medicines from the catalog
 
 ## Gantt Chart
 The timeline for the development of this project is available in the Gantt Chart below:
