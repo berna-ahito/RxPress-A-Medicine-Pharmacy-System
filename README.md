@@ -1,5 +1,5 @@
 # RxPress-A-Medicine-Pharmacy-System
-This project is a Django-based web application that facilitates the online purchase and delivery of medicines of the customers.
+RxPress is an easy-to-use platform for managing your pharmacy's medicine supply. It helps you handle orders, track inventory, and keep records up to date.
 
 ## Table of Contents
 - [Introduction](#introduction)
