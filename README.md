@@ -23,15 +23,19 @@ RxPress aims to create a medicine online platform designed for convenience for p
 7. Inventory Management: Allows administrators to manage the stock of medicines in the system. Administrators can add new medicines to the inventory, can update the stock levels of existing medicines and can remove medicines from the catalog
 
 ## Gantt Chart
+The timeline for the development of this project is available in the Gantt Chart below:
+
 [View Gantt Chart](https://yourlinktoganttchart.com)
 
 ## ERD
 The following ERD outlines the relationships between entities in the system, such as users, adminstrators, shopping cart, medicine:
-[View ERD](https://drive.google.com/file/d/15EeDtZ7D4PGuASBMvxIvKe2dKOj4FEAc/view?usp=sharing)
+
+[ERD Diagram](https://drive.google.com/file/d/15EeDtZ7D4PGuASBMvxIvKe2dKOj4FEAc/view?usp=sharing)
 
 ## UI/UX
 The design and layout of the user interface can be explored via the Figma link below:
-[View UI/UX](https://www.figma.com/design/hclbwOZiAfHJtQUMpU0ufz/CSIT284---UI%2FUX?node-id=0-1&t=obRXPnsg7D4mSdYi-1)
+
+[UI/UX Design](https://www.figma.com/design/hclbwOZiAfHJtQUMpU0ufz/CSIT284---UI%2FUX?node-id=0-1&t=obRXPnsg7D4mSdYi-1)
 
 ## Contributors
 Bernadeth Claire G. Ahito
