@@ -25,7 +25,7 @@ This project is a Django-based web application that facilitates the online purch
 ## Gantt Chart
 The timeline for the development of this project is available in the Gantt Chart below:
 
-[View Gantt Chart](https://yourlinktoganttchart.com)
+[View Gantt Chart]([https://yourlinktoganttchart.com](https://docs.google.com/spreadsheets/d/1at0eZmy3vxpc0ElWpQmO_G5tugRahYfOIOwzwimoFiQ/edit?usp=sharing))
 
 ## ERD
 The following ERD outlines the relationships between entities in the system, such as users, adminstrators, shopping cart, medicine:
