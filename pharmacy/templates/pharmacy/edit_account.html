@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+    <link rel="stylesheet" href="{% static 'ok.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap">
+</head>
+<body>
+    <header>
+        <h1>RxPress</h1>
+        <nav>
+            <a href="{% url 'pharmacy:homepage' %}">Home</a>
+            <a href="{% url 'pharmacy:account' %}">Account</a>
+            <a href="{% url 'pharmacy:cart_view' %}">Shopping Cart</a>
+            <a href="{% url 'pharmacy:logout' %}">Log Out</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Edit Your Account</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+            </div>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}">
+            </div>
+            <div>
+                <label for="password">New Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div>
+                <button type="submit">Save Changes</button>
+            </div>
+            <div>
+                <button type="submit" name="delete_account" value="True">Delete Account</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

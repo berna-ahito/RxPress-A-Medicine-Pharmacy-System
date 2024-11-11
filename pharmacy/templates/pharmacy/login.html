@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ok.css' %}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="company-name">RxPress</div>
+    <div class="container home">
+        <div class="form_container form">
+            <h1>Login</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input_box">
+                    <label for="username"><i class="uil uil-at"></i></label>
+                    <input type="text" id="username" class="form-control" name="username" placeholder="Username" required>
+                </div>
+                <div class="input_box password">
+                    <label for="password"><i class="uil uil-lock-alt"></i></label>
+                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+                    <i class="pw_hide uil uil-eye-slash" aria-hidden="true"></i>
+                </div>
+                <input type="submit" name="btnLogin" value="Login" class="button btn btn-primary">
+                <a href="{% url 'pharmacy:register' %}" class="signup_form">Sign Up</a>
+
+                {% if form.non_field_errors %}
+                    <div class="error_message">
+                        <p>{{ form.non_field_errors }}</p>
+                    </div>
+                {% endif %}
+
+                {% if request.GET.next %}
+                    <p class="info_message">Please log in to continue to your previous page.</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const pwHide = document.querySelector('.pw_hide');
+        const pwInput = document.querySelector('#password');
+        pwHide.addEventListener('click', function () {
+            const type = pwInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            pwInput.setAttribute('type', type);
+            this.classList.toggle('uil-eye-slash');
+            this.classList.toggle('uil-eye');
+        });
+    </script>
+</body>
+</html>

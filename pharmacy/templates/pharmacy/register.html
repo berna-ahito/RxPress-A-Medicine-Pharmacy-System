@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="{% static 'ok.css' %}">
+</head>
+<body>
+<main>
+    <div class="company-name">RxPress</div>
+    <div class="container">
+        <h2>Register</h2>
+        <p>Create your account</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <table>
+                <tr>
+                    <td><label for="id_first_name">First Name:</label></td>
+                    <td>{{ form.first_name }}{{ form.first_name.errors }}</td>
+                </tr>
+                <tr>
+                    <td><label for="id_username">Username:</label></td>
+                    <td>{{ form.username }}{{ form.username.errors }}</td>
+                </tr>
+                <!-- Removed email field -->
+                <tr>
+                    <td><label for="id_password">Password:</label></td>
+                    <td>{{ form.password1 }}{{ form.password1.errors }}</td>
+                </tr>
+                <tr>
+                    <td><label for="id_confirm_password">Confirm Password:</label></td>
+                    <td>{{ form.password2 }}{{ form.password2.errors }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="button-container">
+                        <input type="checkbox" name="agree_to_terms" id="id_agree_to_terms" required>
+                        <label for="id_agree_to_terms">By signing up, you consent to abide by our terms and conditions.</label>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" name="btnRegister" value="Register" class="button btn btn-primary">
+            <a href="{% url 'pharmacy:login' %}" class="signup_form">Already have an account? Login here!</a>
+        </form>
+    </div>
+</main>
+</body>
+</html>

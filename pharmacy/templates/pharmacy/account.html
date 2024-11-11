@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link rel="stylesheet" href="{% static 'ok.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #5fcbf5;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            margin: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #5fcbf5;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin: 5px 0;
+        }
+
+        .button:hover {
+            background-color: #4fb8e2;
+        }
+    </style>    
+</head>
+<body>
+<header>
+    <h1>MedSupplyMart</h1>
+    <nav>
+        <a href="{% url 'pharmacy:homepage' %}">Home</a>
+        <a href="{% url 'pharmacy:account' %}">Account</a>
+        <a href="{% url 'pharmacy:cart_view' %}">Shopping Cart</a>
+        <a href="{% url 'pharmacy:logout' %}">Log Out</a>
+    </nav>
+</header>
+<section>
+    <div class="container">
+        <div align="right">Welcome to MedSupplyMart, <b>{{ user.username }}</b></div>
+        <h2>Welcome</h2>
+        <p>Manage your profile to make MedSupplyMart work better for you</p>
+        <form method="post" action="{% url 'pharmacy:edit_account' %}">
+            {% csrf_token %}
+            <button type="submit" class="button">Edit Profile</button>
+        </form>
+    </div>
+</section>
+<hr>
+    <div id="footer" align="center">
+        BCA Copyright 20{{ year }}
+    </div>
+</hr>
+</body>
+</html>

@@ -1,0 +1,94 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8; 
+    margin: 0;
+}
+
+header {
+    background: linear-gradient(500deg, #33ADF3, #1E5C7F); 
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif; 
+    margin: 0; 
+}
+
+.nav-container nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+h2.subtext, h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 25px;
+    color: #66727f;
+}
+
+.container {
+    max-width: 90%; 
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    background: linear-gradient(500deg, #EEF4F7, #DAF2FF); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+table {
+    width: 100%; 
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #2784bb; 
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #C4EAFF; 
+}
+
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+}
+
+
+button {
+    background-color: #37789e; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #37789e; 
+}
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
