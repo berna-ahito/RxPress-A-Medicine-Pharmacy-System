@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+        <div class="onboarding-screen">
+            <img src="{{ url_for('static', filename='LogoWithoutText.png') }}" alt="Logo" class="onboarding-logo" style="position: absolute; margin-top: 50px;">
+            <div class="onboarding-container">
+                <h2>Let’s get started!</h2>
+                <p>Login or register to enjoy <br><br> the features we’ve provided!</p>
+                <div class="button-container">
+                    <a href="/login" class="button login">Login</a>
+                    <a href="/signup" class="button signup">Sign Up</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="login-screen">
+            <div class="login-logo-container">
+                <img src="{{ url_for('static', filename='LogoWithoutText.png') }}" alt="Logo" class="login-logo">
+            </div>
+            <div class="exit-button-container">
+                <a href="/onboarding">
+                    <img src="{{ url_for('static', filename='ExitBtn.png') }}" alt="Exit" class="exit-button">
+                </a>
+            </div>
+            <div class="signup-form-container">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div id="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            
+                
+                <form method="POST" action="{{ url_for('signup') }}">
+                    <label for="first_name" style="color: #106BA3; font-family: 'Montserrat Alternates', sans-serif;">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" style= "font-family: 'Montserrat Alternates', sans-serif;" required>
+                    <br>
+                    <label for="last_name" style="color: #106BA3;  font-family: 'Montserrat Alternates', sans-serif;">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" style= "font-family: 'Montserrat Alternates', sans-serif;" required>
+                    <br>
+                    <label for="username" style="color: #106BA3;  font-family: 'Montserrat Alternates', sans-serif;">Email:</label>
+                    <input type="email" id="username" name="username" placeholder="Enter your email" style= "font-family: 'Montserrat Alternates', sans-serif;" required>
+                    <br>
+                    <label for="password" style="color: #106BA3;  font-family: 'Montserrat Alternates', sans-serif;">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" style= "font-family: 'Montserrat Alternates', sans-serif;" required>
+                    <br>
+                    <label for="confirm_password" style="color: #106BA3;  font-family: 'Montserrat Alternates', sans-serif;">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password"  style= "font-family: 'Montserrat Alternates', sans-serif;" required>
+                    <br>
+                    <label for="user_type" style="color: #106BA3; font-family: 'Montserrat Alternates', sans-serif;">User Type:</label>
+                    <select id="user_type" name="user_type">
+                        <option value="user" style="font-family: 'Montserrat Alternates', sans-serif;">User</option>
+                        <option value="admin" style="font-family: 'Montserrat Alternates', sans-serif;">Admin</option>
+                    </select>
+                    <br>
+                    <button type="submit" style="font-family: 'Montserrat Alternates', sans-serif;">Sign Up</button>
+                </form>
+                <a style="color: #717784; font-family: 'Montserrat Alternates', sans-serif;">Already have an account?</a>
+                <a href="/login" style="color: #106BA3; text-decoration: underline; font-family: 'Montserrat Alternates', sans-serif;"> Login</a>
+            </div>
+        </div>
+</body>
+</html>
