@@ -73,14 +73,11 @@ WSGI_APPLICATION = 'rxpress.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rxpress_db',  # Ensure the database name is correct
-        'USER': 'root',
-        'PASSWORD': '',  # Use your MySQL root password if any
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

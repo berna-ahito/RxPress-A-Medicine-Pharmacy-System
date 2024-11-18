@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Profile
 
 # Custom Registration Form
 class RegisterForm(UserCreationForm):
@@ -16,17 +17,14 @@ class RegisterForm(UserCreationForm):
             'password2': forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
         }
 
-    # Optionally, you can add custom validation for username
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError('A user with this username already exists.')
         return username
 
-    # Override password validation to make it less strict
     def clean_password1(self):
         password = self.cleaned_data.get('password1')
-        # You can modify this to a more lenient check if you want
         if len(password) < 6:  # Minimum password length can be 6 characters (less strict)
             raise forms.ValidationError('Password must be at least 6 characters long.')
         return password
@@ -37,6 +35,7 @@ class RegisterForm(UserCreationForm):
         if password2 != password1:
             raise forms.ValidationError('Passwords do not match.')
         return password2
+
 
 # Edit Profile Form
 class EditProfileForm(forms.ModelForm):
@@ -50,7 +49,7 @@ class EditProfileForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'password': forms.PasswordInput(attrs={'placeholder': 'New Password (optional)'}),
         }
-    
+
     def clean_password(self):
         password = self.cleaned_data.get('password')
         if password and len(password) < 6:

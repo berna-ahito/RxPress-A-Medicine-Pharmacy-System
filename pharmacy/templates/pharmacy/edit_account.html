@@ -24,25 +24,52 @@
         <h2>Edit Your Account</h2>
         <form method="POST">
             {% csrf_token %}
+            
+            <!-- First Name Field -->
             <div>
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
             </div>
+        
+            <!-- Username Field -->
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" value="{{ user.username }}">
             </div>
+        
+            <!-- New Password Field -->
             <div>
                 <label for="password">New Password:</label>
                 <input type="password" id="password" name="password">
             </div>
+        
+            <!-- Confirm Password Field -->
+            <div>
+                <label for="password_confirmation">Confirm New Password:</label>
+                <input type="password" id="password_confirmation" name="password_confirmation">
+            </div>
+        
+            <!-- Save Changes Button -->
             <div>
                 <button type="submit">Save Changes</button>
             </div>
+        
+            <!-- Delete Account Button -->
             <div>
                 <button type="submit" name="delete_account" value="True">Delete Account</button>
             </div>
-        </form>
+        </form>        
     </div>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 </body>
 </html>

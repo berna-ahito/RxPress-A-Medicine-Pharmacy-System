@@ -8,81 +8,89 @@ class Medicine(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     strength = models.CharField(max_length=50)
-    category = models.CharField(max_length=50)
+    category = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    quantity = models.IntegerField()
+    quantity = models.PositiveIntegerField()  # Prevents negative quantities
 
     def __str__(self):
         return self.name
 
 
-# Modify Order model to have total cost
+# Order Model
 class Order(models.Model):
-    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE, related_name='orders')
+    quantity = models.PositiveIntegerField()
     order_date = models.DateTimeField(auto_now_add=True)
-    is_cart = models.BooleanField(default=True)  # Distinguishes cart items from placed orders
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  # Total cost per item
+    is_cart = models.BooleanField(default=True)  # Distinguishes between cart items and orders
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
 
     def save(self, *args, **kwargs):
-        # Automatically update total cost whenever the quantity or medicine price changes
         self.total_cost = self.medicine.price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.medicine.name} ({'Cart' if self.is_cart else 'Order'})"
+        return f"{self.medicine.name} - {'Cart' if self.is_cart else 'Order'}"
 
 
-# Profile Model
+# User Profile Model
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-
-    # New fields with defaults
-    userID = models.IntegerField(null=True, blank=True)  # Allow null values
-    firstName = models.CharField(max_length=255, null=True, blank=True)  # Allow null values
-    username = models.CharField(max_length=50, unique=True)  # Username as VARCHAR(50), unique
-    password = models.CharField(max_length=50, null=True, blank=True)  # Allow null values
+    userID = models.PositiveIntegerField(null=True, blank=True)
+    first_name = models.CharField(max_length=255, null=True, blank=True)
+    password = models.CharField(max_length=50, null=True, blank=True)
     USER_TYPE_CHOICES = [
         ('admin', 'Admin'),
         ('user', 'User'),
     ]
-    # Set default value for 'user_type' to avoid issues with non-nullable constraint
-    user_type = models.CharField(max_length=5, choices=USER_TYPE_CHOICES, default='user')  # Default set to 'user'
+    user_type = models.CharField(max_length=5, choices=USER_TYPE_CHOICES, default='user')
 
     def __str__(self):
-        return f'{self.firstName} ({self.username}) Profile'
+        return f'{self.first_name or "No Name"} ({self.user.username})'
 
-    # Ensure userID is set after the profile is created
     def save(self, *args, **kwargs):
         if not self.userID and self.user:
-            self.userID = self.user.id  # Set userID to User's id
+            self.userID = self.user.id
         super().save(*args, **kwargs)
 
 
-# Signals to auto-create and update user profile
+# Signals to Create and Update User Profile
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+
+# Shopping Cart Model
 class ShoppingCart(models.Model):
-    cartID = models.AutoField(primary_key=True)
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='shopping_cart')
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     def __str__(self):
         return f"Cart for {self.user.username}"
 
-# CartItem Model to link the shopping cart and medicines
+    def update_total_cost(self):
+        """Update the total cost of the cart."""
+        self.total_cost = sum(item.total_cost for item in self.items.all())
+        self.save()
+
+
 class CartItem(models.Model):
     cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, related_name='items')
     medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=1)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+
+    def save(self, *args, **kwargs):
+        self.total_cost = self.medicine.price * self.quantity  # Recalculate the total cost
+        super().save(*args, **kwargs)
+        self.cart.update_total_cost()  # Update total cost in the associated cart
 
     def __str__(self):
         return f"{self.medicine.name} in {self.cart.user.username}'s cart"
+

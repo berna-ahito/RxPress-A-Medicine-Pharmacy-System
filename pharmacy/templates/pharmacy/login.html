@@ -16,6 +16,10 @@
             <h1>Login</h1>
             <form method="post">
                 {% csrf_token %}
+                
+                <!-- Hidden next field for redirection -->
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+
                 <div class="input_box">
                     <label for="username"><i class="uil uil-at"></i></label>
                     <input type="text" id="username" class="form-control" name="username" placeholder="Username" required>
@@ -28,6 +32,7 @@
                 <input type="submit" name="btnLogin" value="Login" class="button btn btn-primary">
                 <a href="{% url 'pharmacy:register' %}" class="signup_form">Sign Up</a>
 
+                <!-- Display error messages if any -->
                 {% if form.non_field_errors %}
                     <div class="error_message">
                         <p>{{ form.non_field_errors }}</p>
