@@ -104,7 +104,7 @@ pip install openpyxl
 
 1. Clone the repo
    ```sh
-   git clone 
+   git clone https://github.com/berna-ahito/RxPress-A-Medicine-Pharmacy-System
    ```
 2. Install Requirements
    ```sh
