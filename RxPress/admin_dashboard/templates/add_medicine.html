@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Medicine</title>
+</head>
+<body>
+    <h1>Add New Medicine</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Medicine</button>
+    </form>
+    <a href="{% url 'admin_dashboard:medicine_list' %}">Back to Medicine List</a>
+</body>
+</html>

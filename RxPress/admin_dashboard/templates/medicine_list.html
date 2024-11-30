@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine List</title>
+</head>
+<body>
+    <h1>Medicine List</h1>
+    <a href="{% url 'admin_dashboard:add_medicine' %}">Add New Medicine</a>
+    <ul>
+        {% for medicine in medicines %}
+            <li>{{ medicine.name }} - {{ medicine.category }} - {{ medicine.strength }} - ${{ medicine.price }} - Quantity: {{ medicine.quantity }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
