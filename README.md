@@ -178,7 +178,7 @@ The design and layout of the user interface can be explored via the Figma link b
     </tr>
     <tr>
       <td align="center">
-        <strong>Kiana Maqrquisa S. Del Mar</strong><br>
+        <strong>Kiana Marquisa S. Del Mar</strong><br>
         <a href="https://github.com/KianaDelMar"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Kiana's GitHub"></a>
       </td>
       <td>
