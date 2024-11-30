@@ -127,7 +127,7 @@ pip install openpyxl
 
 The timeline for the development of this project is available in the Gantt Chart below:
 
-[Gantt Chart](https://docs.google.com/spreadsheets/d/1at0eZmy3vxpc0ElWpQmO_G5tugRahYfOIOwzwimoFiQ/edit?usp=sharing)
+[Gantt Chart](https://docs.google.com/spreadsheets/d/1SAFKTDseweKnDu_fouK8daas7jXb43GULPZr4hVrHgg/edit?usp=sharing)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
