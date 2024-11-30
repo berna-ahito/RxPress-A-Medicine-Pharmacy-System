@@ -182,7 +182,7 @@ The design and layout of the user interface can be explored via the Figma link b
         <a href="https://github.com/KianaDelMar"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Kiana's GitHub"></a>
       </td>
       <td>
-        <p>Admin Dashboard, Register, Login, Logout</p>
+        <p>Admin Dashboard, Sign in, Sign up</p>
       </td>
     </tr>
   </table>
