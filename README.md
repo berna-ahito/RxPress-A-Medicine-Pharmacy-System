@@ -33,7 +33,6 @@
 
 ## Introduction
 
-{% comment %} [![Admin-Dashboard](https://github.com/eynabdllh/pet-adoption-system/raw/main/static/images/screenshot.png)](https://github.com/eynabdllh/pet-adoption-system) {% endcomment %}
 
 **RxPress** aims to create a medicine online platform designed for convenience for purchasing medication products. It connects customers with pharmacies, allowing them to place orders online, while pharmacies can manage their stock and track orders through the system. It also covers the entire lifecycle of medicine transactions, from browsing and selecting products to payment processing. It includes functionalities for users to browse and order medicines, view their order history, and manage their accounts.
 
@@ -147,7 +146,7 @@ The following ERD outlines the relationships between entities in the system, suc
 
 The design and layout of the user interface can be explored via the Figma link below:
 
-[UI/UX Design](https://www.figma.com/design/QkxAZ7so69q8vqw4oeFkwE/Adopt-a-Pet?node-id=0-1&t=AOHbSggJNBGv0g9K-1)
+[UI/UX Design](https://www.figma.com/design/hclbwOZiAfHJtQUMpU0ufz/CSIT327---IM2---SYSTEM-UI%2FUX?node-id=0-1&t=l2Inp7193Z73KgIa-1)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
