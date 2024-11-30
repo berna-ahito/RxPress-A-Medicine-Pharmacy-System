@@ -164,25 +164,25 @@ The design and layout of the user interface can be explored via the Figma link b
         <a href="https://github.com/berna-ahito"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Bernadeth's GitHub"></a>
       </td>
       <td>
-        <p>Admin Dashboard, Register, Login, logout</p>
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <strong>Kiana Marquisa S. Del Mar</strong><br>
-        <a href="hhttps://github.com/KianaDelMar"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Kiana's GitHub"></a>
-      </td>
-      <td>
         <p>Accounts & Shopping Cart</p>
       </td>
     </tr>
     <tr>
       <td align="center">
         <strong>Juvie R. Coca</strong><br>
-        <a href="https://github.com/Juvie-cmd"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Juvie's GitHub"></a>
+        <a href="https://github.com/Juvie-cmd"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Kiana's GitHub"></a>
       </td>
       <td>
-        <p>Homepage, Orders</p>
+        <p> Homepage, Orders</p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <strong>Kiana Maqrquisa S. Del Mar</strong><br>
+        <a href="https://github.com/KianaDelMar"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Kiana's GitHub"></a>
+      </td>
+      <td>
+        <p>Admin Dashboard, Register, Login, Logout</p>
       </td>
     </tr>
   </table>
