@@ -136,7 +136,7 @@ The timeline for the development of this project is available in the Gantt Chart
 
 The following ERD outlines the relationships between entities in the system, such as users, pets, and adoption requests:
 
-[ERD Diagram](https://drive.google.com/file/d/15EeDtZ7D4PGuASBMvxIvKe2dKOj4FEAc/view?usp=sharing)
+[ERD Diagram]()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
