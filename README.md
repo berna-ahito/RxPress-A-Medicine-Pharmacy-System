@@ -1,7 +1,7 @@
 <a id="readme-top"></a>
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="app/static/Logo.png" alt="Logo" width="350" height="80">
+    <img src="app/static/Logo.png" alt="Logo" width="350" height="200">
   </a>
   <p align="center"><i>The RxPress Medicine Pharmacy System is a Django-based web application designed to streamline medical system processes. This project was developed as part of our Information Management 2 capstone.</i></p>
   <a href="https://github.com/berna-ahito/RxPress-A-Medicine-Pharmacy-System/stargazers"><img src="https://img.shields.io/github/stars/berna-ahito/RxPress-A-Medicine-Pharmacy-System" alt="Stars Badge"/></a>
