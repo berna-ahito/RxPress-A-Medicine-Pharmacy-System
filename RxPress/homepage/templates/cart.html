@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
@@ -17,10 +17,12 @@
     <br>
     <div class="nav-container">
         <nav>
-            <a href="{% url 'pharmacy:homepage' %}">Home</a>
+            <a href="{% url 'homepage:homepage' %}">Home</a>
             {% comment %} <a href="{% url 'pharmacy:account' %}">Account</a> {% endcomment %}
-            <a href="{% url 'pharmacy:cart_view' %}">Shopping Cart</a>
-            <a href="{% url 'pharmacy:order_view' %}">Order</a>
+            <a href="{% url 'homepage:cart_view' %}">Shopping Cart</a>
+            <a href="{% url 'homepage:order_view' %}">Order</a>
+            <a href="{% url 'homepage:logout' %}">Logout</a>
+
         </nav>
     </div>
 </header>
@@ -39,7 +41,7 @@
         {% endif %}
 
         {% if cartItemsResult and cartItemsResult|length > 0 %}
-        <form action="{% url 'pharmacy:update_cart' %}" method="post" id="cart-form">
+        <form action="{% url 'homepage:update_cart' %}" method="post" id="cart-form">
             {% csrf_token %}
             <table>
                 <thead>
@@ -71,7 +73,7 @@
             <p>Total Cost: <strong>₱{{ totalCostResult|floatformat:2 }}</strong></p>
         </form>                
         
-        <form action="{% url 'pharmacy:place_order' %}" method="post">
+        <form action="{% url 'homepage:place_order' %}" method="post">
             {% csrf_token %}
             <br>
             <button type="submit" class="place-order-btn">Place Order</button>
@@ -92,7 +94,7 @@
             const medicineId = this.getAttribute('data-medicine-id');
 
             // Send AJAX request to remove item
-            {% comment %} fetch("{% url 'pharmacy:remove_from_cart' %}", {
+            {% comment %} fetch("{% url 'homepage:remove_from_cart' %}", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

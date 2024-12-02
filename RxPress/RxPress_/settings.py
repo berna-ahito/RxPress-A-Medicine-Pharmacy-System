@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login_register',
     'admin_dashboard',
+    'homepage',
 ]
 
 MIDDLEWARE = [

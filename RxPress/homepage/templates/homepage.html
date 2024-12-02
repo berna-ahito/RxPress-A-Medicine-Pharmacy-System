@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
@@ -22,9 +22,11 @@
     <br>
     <div class="nav-container">
         <nav>
-            <a href="{% url 'pharmacy:homepage' %}">Home</a>
-            <a href="{% url 'pharmacy:cart_view' %}">Shopping Cart</a>
-            <a href="{% url 'pharmacy:order_view' %}">Order</a>
+            <a href="{% url 'homepage:homepage' %}">Home</a>
+            <a href="{% url 'homepage:cart_view' %}">Shopping Cart</a>
+            <a href="{% url 'homepage:order_view' %}">Order</a>
+            <a href="{% url 'homepage:logout' %}">Logout</a>
+
         </nav>
     </div>
 </header>
@@ -38,8 +40,8 @@
     </div>
 
     <div class="container"> 
-        {% comment %} <form method="post" action="{% url 'pharmacy:add_to_cart' %}">
-            {% csrf_token %} {% endcomment %}
+        <form method="post" action="{% url 'homepage:add_to_cart' %}">
+            {% csrf_token %}
         <table id="medicine-table">
             <thead>
                 <tr>

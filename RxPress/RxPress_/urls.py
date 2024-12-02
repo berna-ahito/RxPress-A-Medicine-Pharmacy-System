@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('login_register.urls')),
     path('admin-dashboard/', include('admin_dashboard.urls')),
+    path('', include('homepage.urls')),  # Include the homepage app's URLs
+    # path('auth/', include('login_register.urls', namespace='login_register')),
 ]
-

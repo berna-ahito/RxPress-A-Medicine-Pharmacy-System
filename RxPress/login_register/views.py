@@ -4,7 +4,8 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.hashers import check_password 
 from .models import User
 
-# Login view
+
+# # Login view
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -25,7 +26,7 @@ def login(request):
                         return redirect('admin_dashboard:medicine_list')  # Add namespace
                     else:
                         messages.success(request, 'Login successful!')
-                        return redirect('login_register:home')  # Add namespace
+                        return redirect('login_register:homepage')  # Add namespace
                 else:
                     messages.error(request, 'Invalid password.')
             except User.DoesNotExist:
@@ -35,6 +36,8 @@ def login(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
+
+
 
 # Signup view
 def signup(request):
@@ -75,3 +78,6 @@ def onboarding(request):
 
 def splash(request):
     return render(request, 'splash.html')
+
+def homepage(request):
+    return render(request, 'homepage.html')
