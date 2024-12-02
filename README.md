@@ -1,7 +1,7 @@
 <a id="readme-top"></a>
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="app/static/Logo.png" alt="Logo" width="350" height="200">
+    <img src="RxPress/static/Logo.png" alt="Logo" width="350" height="200">
   </a>
   <p align="center"><i>The RxPress Medicine Pharmacy System is a Django-based web application designed to streamline medical system processes. This project was developed as part of our Information Management 2 capstone.</i></p>
   <a href="https://github.com/berna-ahito/RxPress-A-Medicine-Pharmacy-System/stargazers"><img src="https://img.shields.io/github/stars/berna-ahito/RxPress-A-Medicine-Pharmacy-System" alt="Stars Badge"/></a>
@@ -41,14 +41,13 @@
 ---
 
 ## Features
-1. **User Registration and Authentication:** Users can create an account and login.
-2. **Profile Management:** Users can edit their account details such as can change name, email, and password.
-3. **Order Management:** Users can track the status of the orders such as can view past orders and reorder products.
-4. **Shopping Cart and Checkout Process:** Users can add to cart and check out. Customers can add, remove, or update product in cart.
-5. **Payment Processing:** Secure the financial transactions, secure the payment information, multiple payment.
-6. **Medicine Catalog:** Users can view detailed information about each medicine, including name, description, price, and stock status.
-7. **Inventory Management:** Allows administrators to manage the stock of medicines in the system. Administrators can add new medicines to the inventory, can update the stock levels of existing medicines and can remove medicines from the catalog
-
+1. **User Registration and Authentication:** Customers can create an account and login.
+2. **Profile Management:** Customers can edit their account details such as can change name, email, and password.
+3. **Order Management:** Customers can track the status of the orders such as viewing past orders and reordering products.
+4. **Shopping Cart and Checkout Process:** Customers can add, remove, update product in cart, and check out. 
+5. **Payment Processing:** Customers can secure the financial transactions, secure the payment information, multiple payment.
+6. **Medicine Catalog:** Customers can view detailed information about each medicine, including name, description, price, and stock status.
+7. **Inventory Management:** Allows administrators to manage the stock of medicines in the system. Administrators can get, add, update, and delete new medicines with their categories, descirption, price, and stock to the inventory.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
@@ -79,13 +78,13 @@
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+This is an example of how to list things you need to use for the software, and how to install them.
 #### 1. Install Python
-Install ```python-3.12.5```. Follow the steps from the below reference document based on your Operating System.
+Install ```python-3.12.5```. Follow the steps from the referenced document below based on your Operating System.
 Reference: [https://docs.python-guide.org/starting/installation/](https://docs.python-guide.org/starting/installation/) 
 
 #### 2. Setup virtual environment
@@ -170,7 +169,7 @@ The design and layout of the user interface can be explored via the Figma link b
     <tr>
       <td align="center">
         <strong>Juvie R. Coca</strong><br>
-        <a href="https://github.com/Juvie-cmd"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Kiana's GitHub"></a>
+        <a href="https://github.com/Juvie-cmd"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Juvie's GitHub"></a>
       </td>
       <td>
         <p> Homepage, Orders</p>

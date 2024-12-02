@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Medicine
 from .forms import MedicineForm
 from django.template import TemplateDoesNotExist, loader
+from django.contrib import messages
 
 # View to display the list of medicines
 def medicine_list(request):
@@ -18,7 +19,8 @@ def add_medicine(request):
         form = MedicineForm(request.POST)
         if form.is_valid():
             form.save()  # Save the new medicine to the database
-            return redirect('medicine_list')  # Redirect to the medicine list view
+            messages.success(request, "Medicine added!")  # Add a success message
+            form = MedicineForm()
     else:
         form = MedicineForm()
     
