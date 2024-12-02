@@ -6,12 +6,51 @@
     <title>Add Medicine</title>
 </head>
 <body>
-    <h1>Add New Medicine</h1>
+    <h1>Add a New Medicine</h1>
+    <style>
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid transparent;
+            border-radius: 5px;
+        }
+        .message.success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+    </style>
+
+    <!-- Display success or error messages -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="message {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Medicine form -->
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Add Medicine</button>
     </form>
+
     <a href="{% url 'admin_dashboard:medicine_list' %}">Back to Medicine List</a>
+
+    <script>
+        // Automatically hide messages after 3 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) {
+                setTimeout(() => {
+                    flashMessages.style.transition = 'opacity 1s';
+                    flashMessages.style.opacity = '0';
+                    setTimeout(() => flashMessages.remove(), 1000); // Remove from DOM after fading out
+                }, 3000); // Wait for 3 seconds
+            }
+        });
+    </script>
 </body>
 </html>

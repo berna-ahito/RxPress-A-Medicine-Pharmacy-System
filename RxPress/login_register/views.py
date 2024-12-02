@@ -25,7 +25,7 @@ def login(request):
                         return redirect('admin_dashboard:medicine_list')  # Add namespace
                     else:
                         messages.success(request, 'Login successful!')
-                        return redirect('login_register:home')  # Add namespace
+                        return redirect('homepage:homepage')  # Add namespace
                 else:
                     messages.error(request, 'Invalid password.')
             except User.DoesNotExist:
@@ -61,8 +61,6 @@ def signup(request):
     else:
         form = RegisterForm()
     return render(request, 'signup.html', {'form': form})
-
-
 
 # Logout view
 def logout(request):
