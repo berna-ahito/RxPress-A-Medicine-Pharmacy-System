@@ -4,8 +4,6 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.hashers import check_password 
 from .models import User
 
-
-# # Login view
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -15,22 +13,18 @@ def login(request):
             try:
                 user = User.objects.get(username=username)
                 if check_password(password, user.password):
-                    # Store session data for authenticated user
                     request.session['id'] = user.id
                     request.session['username'] = user.username
                     request.session['user_type'] = user.user_type
 
-                    # Redirect based on user type
                     if user.user_type == 'admin':
                         messages.success(request, 'Welcome, Admin!')
-                        return redirect('admin_dashboard:medicine_list')  # Add namespace
+                        return redirect('admin_dashboard:medicine_list') 
                     else:
                         messages.success(request, 'Login successful!')
-<<<<<<< HEAD
-                        return redirect('login_register:homepage')  # Add namespace
-=======
-                        return redirect('homepage:homepage')  # Add namespace
->>>>>>> 4377c4ba2d4fe5b33519373b8148e3d200f5096b
+                        return redirect('login_register:homepage') 
+
+                        return redirect('homepage:homepage')
                 else:
                     messages.error(request, 'Invalid password.')
             except User.DoesNotExist:
@@ -49,31 +43,27 @@ def signup(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            # Check if the username already exists
             if User.objects.filter(username=data['username']).exists():
                 messages.error(request, 'Username already exists. Please choose another.')
                 return render(request, 'signup.html', {'form': form})
 
-            # Check if the email already exists
             if User.objects.filter(email=data['email']).exists():
                 messages.error(request, 'Email already exists. Please choose another.')
                 return render(request, 'signup.html', {'form': form})
 
-            # Save the new user if validations pass
             user = form.save()
             messages.success(request, 'User created successfully! You can now log in.')
-            return redirect('login_register:login')  # Add namespace for redirect
+            return redirect('login_register:login')
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
         form = RegisterForm()
     return render(request, 'signup.html', {'form': form})
 
-# Logout view
 def logout(request):
-    request.session.clear()  # Clear user session data
+    request.session.clear()  
     messages.success(request, 'You have been logged out.')
-    return redirect('login')  # Redirect to the login page after logout
+    return redirect('login') 
 
 def onboarding(request):
     return render(request, 'onboarding.html')
