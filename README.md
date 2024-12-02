@@ -169,7 +169,7 @@ The design and layout of the user interface can be explored via the Figma link b
     <tr>
       <td align="center">
         <strong>Juvie R. Coca</strong><br>
-        <a href="https://github.com/Juvie-cmd"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Kiana's GitHub"></a>
+        <a href="https://github.com/Juvie-cmd"><img src="https://img.shields.io/badge/GitHub-Profile-blueviolet?style=for-the-badge&logo=github&logoColor=white" alt="Juvie's GitHub"></a>
       </td>
       <td>
         <p> Homepage, Orders</p>
