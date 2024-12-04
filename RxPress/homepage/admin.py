@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Medicine, Order  
 
-# Register the Medicine model
 @admin.register(Medicine)
 class MedicineAdmin(admin.ModelAdmin):
     list_display = ('name', 'strength', 'category', 'price', 'quantity')  # Fields to display in the list view
