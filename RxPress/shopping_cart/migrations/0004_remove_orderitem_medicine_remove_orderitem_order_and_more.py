@@ -4,11 +4,10 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('homepage', '0002_medicine_category_medicine_strength'),
+        ('homepage', '0002_cart'),
         ('shopping_cart', '0003_medicine_strength_alter_medicine_category'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]

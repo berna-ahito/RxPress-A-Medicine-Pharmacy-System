@@ -1,5 +1,5 @@
 from django import forms
-from .models import Medicine
+from admin_dashboard.models import Medicine
 
 class AddToCartForm(forms.Form):
     medicine_id = forms.IntegerField(widget=forms.HiddenInput())

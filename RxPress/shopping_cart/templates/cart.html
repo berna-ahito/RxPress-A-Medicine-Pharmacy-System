@@ -1,3 +1,5 @@
+<!-- shopping_cart/templates/cart.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,19 +28,18 @@
                 <tbody>
                     {% for cart_item in cart_items %}
                         <tr id="cart-item-{{ cart_item.id }}">
-                            <td>{{ cart_item.name }}</td>
+                            <td>{{ cart_item.medicine.name }}</td>
                             <td>
                                 <input type="number" name="quantity_{{ cart_item.id }}" value="{{ cart_item.quantity }}" min="1" required>
                             </td>
-                            <td>₱{{ cart_item.price|floatformat:2 }} x {{ cart_item.quantity }} = ₱{{ cart_item.total_cost|floatformat:2 }}</td>
+                            <td>₱{{ cart_item.medicine.price|floatformat:2 }} x {{ cart_item.quantity }} = ₱{{ cart_item.total_cost|floatformat:2 }}</td>
                             <td>
-                                <button type="button" class="delete-btn" data-medicine-id="{{ cart_item.id }}">Delete</button>
+                                <button type="button" class="delete-btn" data-item-id="{{ cart_item.id }}">Delete</button>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <!-- Add Update Button to Submit the Form -->
             <button type="submit" class="update-cart-btn">Update Cart</button>
             <p>Total Cost: <strong>₱{{ total_cost|floatformat:2 }}</strong></p>
         </form>
@@ -60,27 +61,24 @@
     // Handle AJAX delete
     document.querySelectorAll('.delete-btn').forEach(button => {
         button.addEventListener('click', function() {
-            const medicineId = this.getAttribute('data-medicine-id');
+            const itemId = this.getAttribute('data-item-id');
 
-            // Send AJAX request to remove item
-            fetch("{% url 'shopping_cart:remove_from_cart' %}", {
+            fetch("{% url 'shopping_cart:remove_from_cart' item_id=0 %}".replace('0', itemId), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': '{{ csrf_token }}'
                 },
                 body: JSON.stringify({
-                    'medicine_id': medicineId
+                    'item_id': itemId
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Remove the item row from the table
-                    document.getElementById(`cart-item-${medicineId}`).remove();
-                    // Update the total cost displayed on the page
+                    document.getElementById(`cart-item-${itemId}`).remove();
                     document.querySelector('p strong').textContent = `₱${data.total_cost}`;
-                    alert(data.message);  // Show success message
+                    alert(data.message);
                 } else {
                     alert('Error: ' + data.message);
                 }

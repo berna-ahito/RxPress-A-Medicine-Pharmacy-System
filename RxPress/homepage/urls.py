@@ -1,15 +1,11 @@
-from django.urls import path, include
-from . import views  # Import your views
+from django.urls import path
+from . import views
 
-app_name = 'homepage'  # Namespacing the app URLs
+app_name = 'homepage'
 
 urlpatterns = [
-
-    path('homepage/', views.homepage, name='homepage'),  # Homepage route
-    path('order/', views.order_view, name='order_view'),  # Example route
-    path('cart/', views.cart_view, name='cart_view'),
-    path('logout/', views.logout, name='logout'),
-    path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
-
-
+    path('homepage/', views.homepage, name='homepage'),
+    path('cart/', views.cart_view, name='cart_view'),  # Add this line if the view exists in homepage app
+    path('order/', views.order_view, name='order_view'),  # Add this line if the view exists in homepage app
+    path('logout/', views.logout_view, name='logout'),  # Add this line if the view exists in homepage app
 ]
