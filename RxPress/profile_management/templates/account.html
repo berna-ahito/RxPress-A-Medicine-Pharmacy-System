@@ -5,76 +5,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
+    <title>RxPress - Profile</title>
     <link rel="stylesheet" href="{% static 'index.css' %}">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
     <style>
-        .company-name {
+        body {
             font-family: 'Poppins', sans-serif;
-            font-size: 36px;
-            font-weight: 600;
-            text-align: center;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
         }
-        .subtext {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
-            font-weight: 600;
-            margin: 20px 0;
-            text-align: center;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            margin: 0 auto;
-        }
-        input[type="text"], input[type="password"] {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: #007bff;
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(500deg, #33ADF3, #1E5C7F);
             color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
+            padding: 40px 20px;
+            text-align: center;
         }
-        button:hover {
-            background-color: #0056b3;
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            max-width: 90%;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(500deg, #EEF4F7, #DAF2FF);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-container h2 {
+            font-size: 25px;
+            color: #66727f;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .profile-container p {
+            font-size: 18px;
+            color: #66727f;
+            margin-bottom: 25px;
+        }
+
+        .edit-button {
+            background-color: #37789e;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #2784bb;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 5px solid #2784bb;
         }
     </style>
 </head>
 
 <body>
+    <!-- Header -->
     <header>
-        <h1 class="company-name">Edit Profile</h1>
+        <h1 class="logo">RxPress</h1>
+        <nav>
+            <a href="{% url 'homepage:homepage' %}">Home</a>
+            <a href="{% url 'profile_management:account' %}">Account</a>
+            <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
+            <a href="{% url 'orders:order_view' %}">Order</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
     </header>
 
-    <section>
-        <form method="post">
-            {% csrf_token %}
-            <label for="first_name">First Name:</label>
-            <input type="text" name="first_name" value="{{ user.first_name }}" required><br>
-        
-            <label for="username">Username:</label>
-            <input type="text" name="username" value="{{ user.username }}" required><br>
-        
-            <label for="password">Password:</label>
-            <input type="password" name="password" required><br>
-        
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" name="confirm_password" required><br>
-        
-            <button type="submit">Save Changes</button>
+    <!-- Profile Content -->
+    <div class="profile-container">
+        <h2>Welcome, {{ request.session.username }}!</h2>
+        <p>Manage your profile to make RxPress work better for you.</p>
+        <form action="{% url 'profile_management:edit_profile' %}" method="get">
+            <button type="submit" class="edit-button">Edit Profile</button>
         </form>
-    </section>
-
+    </div>
 </body>
 
 </html>

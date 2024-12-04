@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import UserProfileForm
 from django.contrib.auth.forms import UserChangeForm
+from django.contrib import messages
+from django.contrib.auth import logout
 
 @login_required
 def profile_view(request):
-    return render(request, 'profile.html')
+    return render(request, 'edit_profile.html')
 
 @login_required
 def account(request):
@@ -22,10 +24,38 @@ def account(request):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        # Handle form submission for updating profile
+        form = UserProfileForm(request.POST, instance=request.user)
+        
+        # Handle password change
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        
+        if password and password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+            return render(request, 'profile_management/edit_profile.html', {'form': form})
+
         if form.is_valid():
-            form.save()
-            return redirect('homepage:homepage')  # Redirect to homepage after saving changes
+            user = form.save(commit=False)
+            
+            # Only update password if provided
+            if password:
+                user.set_password(password)
+            user.save()
+            
+            # Log the user out after password change
+            if password:
+                logout(request)
+                messages.success(request, 'Your password has been updated. Please log in again.')
+                return redirect('login_register:login')
+            
+            messages.success(request, 'Your profile has been updated successfully.')
+            return redirect('profile_management:profile_view')
+    
     else:
-        form = UserChangeForm(instance=request.user)
-    return render(request, 'account.html', {'form': form})
+        # Display the user profile form
+        form = UserProfileForm(instance=request.user)
+
+    return render(request, 'profile_management/edit_profile.html', {'form': form})
+
+

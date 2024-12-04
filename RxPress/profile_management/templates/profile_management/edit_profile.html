@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .company-name {
+            font-size: 36px;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .nav-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .account-container {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .account-container h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .cancel-button {
+            background-color: #ccc;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .cancel-button:hover {
+            background-color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1 class="company-name">RxPress</h1>
+    </header>
+
+    <!-- Navigation Section Below Header -->
+    <div class="nav-container">
+        <nav>
+            <a href="{% url 'homepage:homepage' %}">Home</a>
+            <a href="{% url 'profile_management:profile_view' %}">Account</a>
+            <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
+            <a href="{% url 'orders:order_view' %}">Order</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </div>
+
+    <div class="account-container">
+        <h2>Edit Your Account</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- First Name -->
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name" value="{{ form.first_name.value|default:user.first_name }}" required><br>
+
+            <!-- Username -->
+            <label for="username">Username:</label>
+            <input type="text" name="username" value="{{ form.username.value|default:user.username }}" required><br>
+
+            <!-- Password -->
+            <label for="password">Password:</label>
+            <input type="password" name="password" placeholder="Enter new password"><br>
+
+            <!-- Confirm Password -->
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" name="confirm_password" placeholder="Confirm new password"><br>
+
+            <button type="submit">Save Changes</button>
+        </form>
+
+        <a href="{% url 'profile_management:profile_view' %}" class="cancel-button">Cancel</a>
+    </div>
+
+</body>
+
+</html>

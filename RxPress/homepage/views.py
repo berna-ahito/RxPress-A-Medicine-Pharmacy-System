@@ -16,7 +16,7 @@ def homepage(request):
 
     add_to_cart_form = AddToCartForm()
 
-    return render(request, 'homepage/homepage.html', {
+    return render(request, 'homepage.html', {
         'medicines': medicines,
         'search_form': search_form,
         'add_to_cart_form': add_to_cart_form,
