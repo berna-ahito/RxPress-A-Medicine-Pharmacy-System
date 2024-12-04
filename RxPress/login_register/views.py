@@ -22,9 +22,8 @@ def login(request):
                         return redirect('admin_dashboard:medicine_list') 
                     else:
                         messages.success(request, 'Login successful!')
-                        return redirect('login_register:homepage') 
+                        return redirect('homepage:homepage')  # Redirecting to homepage app here
 
-                        return redirect('homepage:homepage')
                 else:
                     messages.error(request, 'Invalid password.')
             except User.DoesNotExist:
@@ -35,9 +34,6 @@ def login(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
-
-
-# Signup view
 def signup(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)

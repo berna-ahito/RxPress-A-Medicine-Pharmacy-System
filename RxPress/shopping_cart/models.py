@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from admin_dashboard.models import Medicine
 
-
-# Cart Model
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shopping_cart')
     total_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
@@ -13,7 +11,7 @@ class Cart(models.Model):
     
     # Method to update the total cost of the cart
     def update_total_cost(self):
-        self.total_cost = sum(item.total_cost for item in self.cartitem_set.all())
+        self.total_cost = sum(item.total_cost for item in self.cartitems.all())  # Corrected to 'cartitems'
         self.save()
 
 class CartItem(models.Model):
