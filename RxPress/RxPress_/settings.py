@@ -62,7 +62,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'admin_dashboard/templates',
-            BASE_DIR / 'profile_management/templates',  # Add this line
+            BASE_DIR / 'profile_management/templates',
+            BASE_DIR / 'login_register/templates', 
+            BASE_DIR / 'orders/templates',  
         ],
         'APP_DIRS': True,
         'OPTIONS': {

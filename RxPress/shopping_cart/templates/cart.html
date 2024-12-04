@@ -1,4 +1,4 @@
-<!-- shopping_cart/templates/cart.html -->
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,9 +7,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="{% static 'index.css' %}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(500deg, #33ADF3, #1E5C7F);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Shopping Cart Styling */
+        #cart {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(500deg, #EEF4F7, #DAF2FF);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #33ADF3;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .empty-cart-message {
+            color: #66727f;
+            font-size: 18px;
+        }
+
+        .update-cart-btn, .place-order-btn {
+            background-color: #37789e;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-cart-btn:hover, .place-order-btn:hover {
+            background-color: #2784bb;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 8px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
 </head>
 <body>
+
+<!-- Header -->
+<header>
+    <h1 class="logo">CartList</h1>
+    <nav>
+        <a href="{% url 'homepage:homepage' %}">Home</a>
+        <a href="{% url 'profile_management:account' %}">Account</a>
+        <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
+        <a href="{% url 'orders:order_view' %}">Order</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+</header>
+
+<!-- Shopping Cart Content -->
 <section id="cart">
     <div class="container">
         <h1>Shopping Cart</h1>
