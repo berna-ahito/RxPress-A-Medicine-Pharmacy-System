@@ -57,6 +57,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'RxPress_.urls'
 
+# RxPress/settings.py
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -64,7 +66,8 @@ TEMPLATES = [
             BASE_DIR / 'admin_dashboard/templates',
             BASE_DIR / 'profile_management/templates',
             BASE_DIR / 'login_register/templates', 
-            BASE_DIR / 'orders/templates',  
+            BASE_DIR / 'orders/templates',
+            BASE_DIR / 'shopping_cart/templates',  # Add this line
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -77,6 +80,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'RxPress_.wsgi.application'
 

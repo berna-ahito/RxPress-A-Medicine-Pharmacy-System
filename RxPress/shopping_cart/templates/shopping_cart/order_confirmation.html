@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(500deg, #33ADF3, #1E5C7F);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .confirmation-message {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            background-color: #d4edda;
+            border-radius: 5px;
+            color: #155724;
+            font-size: 18px;
+        }
+
+        .confirmation-message p {
+            font-size: 20px;
+        }
+
+        .confirmation-message strong {
+            font-size: 22px;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="logo">CartList</h1>
+    <nav>
+        <a href="{% url 'homepage:homepage' %}">Home</a>
+        <a href="{% url 'profile_management:account' %}">Account</a>
+        <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
+        <a href="{% url 'orders:order_view' %}">Order</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+</header>
+
+<section class="confirmation-message">
+    <p>Thank you for your order!</p>
+    <p>Your purchase has been successfully completed.</p>
+    <p>Please prepare <strong>₱{{ total_cost|floatformat:2 }}</strong> upon receiving your order.</p>
+</section>
+
+</body>
+</html>

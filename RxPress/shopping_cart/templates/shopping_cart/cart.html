@@ -17,7 +17,6 @@
             padding: 0;
         }
 
-        /* Header Styling */
         header {
             background: linear-gradient(500deg, #33ADF3, #1E5C7F);
             color: white;
@@ -48,7 +47,6 @@
             text-decoration: underline;
         }
 
-        /* Shopping Cart Styling */
         #cart {
             margin-top: 40px;
             text-align: center;
@@ -91,16 +89,16 @@
         .update-cart-btn, .place-order-btn {
             background-color: #37789e;
             color: white;
-            padding: 12px 25px;
-            font-size: 16px;
+            padding: 8px 15px;
+            font-size: 14px;
             font-weight: bold;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            margin-right: 5px;
         }
 
-        .update-cart-btn:hover, .place-order-btn:hover {
+        .update-cart-btn:hover {
             background-color: #2784bb;
         }
 
@@ -116,6 +114,36 @@
 
         .delete-btn:hover {
             background-color: #d32f2f;
+        }
+
+        .order-summary {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .order-summary p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .place-order-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: auto;
+            margin-left: 20px;
+        }
+
+        .place-order-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
@@ -136,7 +164,7 @@
     <div class="container">
         <h1>Shopping Cart</h1>
         {% if cart_items %}
-        <form method="post">
+        <form method="post" action="{% url 'shopping_cart:place_order' %}">
             {% csrf_token %}
             <table>
                 <thead>
@@ -149,27 +177,32 @@
                 </thead>
                 <tbody>
                     {% for cart_item in cart_items %}
-                        <tr id="cart-item-{{ cart_item.id }}">
-                            <td>{{ cart_item.medicine.name }}</td>
-                            <td>
-                                <form method="post" action="{% url 'shopping_cart:update_cart' item_id=cart_item.id %}">
-                                    {% csrf_token %}
-                                    {{ form.quantity }}
-                                    <button type="submit" class="update-btn">Update</button>
-                                </form>
-                            </td>
-                            <td>₱{{ cart_item.medicine.price|floatformat:2 }} x {{ cart_item.quantity }} = ₱{{ cart_item.total_cost|floatformat:2 }}</td>
-                            <td>
-                                <form method="post" action="{% url 'shopping_cart:remove_from_cart' item_id=cart_item.id %}" style="display:inline;">
-                                    {% csrf_token %}
-                                    <button type="submit" class="delete-btn">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr id="cart-item-{{ cart_item.id }}">
+                        <td>{{ cart_item.medicine.name }}</td>
+                        <td>
+                            <input type="number" name="quantity_{{ cart_item.medicine.id }}" value="{{ cart_item.quantity }}" min="1" required>
+                        </td>
+                        <td>₱{{ cart_item.medicine.price|floatformat:2 }} x {{ cart_item.quantity }} = ₱{{ cart_item.total_cost|floatformat:2 }}</td>
+                        <td>
+                            <form method="post" action="{% url 'shopping_cart:update_cart' item_id=cart_item.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="update-cart-btn">Update</button>
+                            </form>
+                            <form method="post" action="{% url 'shopping_cart:remove_from_cart' item_id=cart_item.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <p>Total Cost: <strong>₱{{ total_cost|floatformat:2 }}</strong></p>
+
+            <div class="order-summary">
+                <p>Total Cost: ₱{{ total_cost|floatformat:2 }}</p>
+                <button type="submit" class="place-order-btn">Place Order</button>
+            </div>
+
         </form>
         {% else %}
             <p class="empty-cart-message">Your shopping cart is empty.</p>

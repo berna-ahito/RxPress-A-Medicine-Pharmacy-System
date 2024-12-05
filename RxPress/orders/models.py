@@ -12,13 +12,13 @@ class Order(models.Model):
         return f"Order #{self.id} - {self.user.username}"
 
     def calculate_total_cost(self):
-        return sum(item.total_cost for item in self.cart.cartitem_set.all())
+        return sum(item.item_cost for item in self.items.all())  # Corrected to use 'items.all()' for related OrderItems
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
-    medicine = models.CharField(max_length=100)
+    medicine = models.ForeignKey('admin_dashboard.Medicine', on_delete=models.CASCADE)  # Added link to Medicine
     quantity = models.PositiveIntegerField()
     item_cost = models.DecimalField(max_digits=10, decimal_places=2)
     
     def __str__(self):
-        return f"{self.quantity} of {self.medicine} - ${self.item_cost}"
+        return f"{self.quantity} of {self.medicine.name} - ₱{self.item_cost}"
