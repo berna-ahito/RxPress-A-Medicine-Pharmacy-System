@@ -137,7 +137,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header>
         <h1 class="logo">RxPress</h1>
         <nav>
@@ -148,12 +147,9 @@
             <a href="{% url 'logout' %}">Logout</a>
         </nav>
     </header>
-
-    <!-- Edit Profile Content -->
     <div class="edit-profile-container">
         <h2>Edit Profile</h2>
 
-        <!-- Flash Messages -->
         {% if messages %}
             <div id="flash-messages">
                 {% for message in messages %}
@@ -166,38 +162,32 @@
 
         <form method="POST" action="{% url 'profile_management:edit_profile' %}">
             {% csrf_token %}
-            
-            <!-- First Name -->
+
             <div class="form-row">
                 <label for="first_name">First Name:</label>
                 <input type="text" name="first_name" value="{{ form.first_name.value }}" required>
             </div>
-        
-            <!-- Last Name -->
+
             <div class="form-row">
                 <label for="last_name">Last Name:</label>
                 <input type="text" name="last_name" value="{{ form.last_name.value }}" required>
             </div>
         
-            <!-- Username (pre-filled with logged-in user's username) -->
             <div class="form-row">
                 <label for="username">Username:</label>
                 <input type="text" name="username" value="{{ form.username.value }}" required>
             </div>
         
-            <!-- Email (pre-filled with logged-in user's email) -->
             <div class="form-row">
                 <label for="email">Email:</label>
                 <input type="email" name="email" value="{{ form.email.value }}" required>
             </div>
         
-            <!-- Password -->
             <div class="form-row">
                 <label for="password">New Password:</label>
                 <input type="password" name="password" placeholder="Enter new password (leave blank to keep current)">
             </div>
         
-            <!-- Confirm Password -->
             <div class="form-row">
                 <label for="confirm_password">Confirm New Password:</label>
                 <input type="password" name="confirm_password" placeholder="Confirm new password">

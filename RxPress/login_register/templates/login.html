@@ -46,7 +46,7 @@
             
             <form method="post" action="{% url 'login_register:login' %}">
                 {% csrf_token %}
-                {{ form.as_p }} <!-- Renders the form fields with <p> tags -->
+                {{ form.as_p }} 
                 <button type="submit">Login</button>
             </form>            
             <a style="color: #717784; font-family: 'Montserrat Alternates', sans-serif;">Don't have an account?</a>

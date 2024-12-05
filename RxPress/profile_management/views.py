@@ -15,7 +15,7 @@ def account(request):
         form = UserProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile_management:profile_view')  # Redirect to the profile page after saving
+            return redirect('profile_management:profile_view')  
     else:
         form = UserProfileForm(instance=request.user)
     
@@ -24,10 +24,8 @@ def account(request):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        # Handle form submission for updating profile
         form = UserProfileForm(request.POST, instance=request.user)
         
-        # Handle password change
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
         
@@ -37,13 +35,10 @@ def edit_profile(request):
 
         if form.is_valid():
             user = form.save(commit=False)
-            
-            # Only update password if provided
+
             if password:
                 user.set_password(password)
             user.save()
-            
-            # Log the user out after password change
             if password:
                 logout(request)
                 messages.success(request, 'Your password has been updated. Please log in again.')
@@ -53,7 +48,6 @@ def edit_profile(request):
             return redirect('profile_management:profile_view')
     
     else:
-        # Display the user profile form
         form = UserProfileForm(instance=request.user)
 
     return render(request, 'profile_management/edit_profile.html', {'form': form})

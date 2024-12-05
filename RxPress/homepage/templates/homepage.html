@@ -75,14 +75,13 @@
 </section>
 
 <script>
-    // JavaScript function to filter medicines
     function filterMedicines() {
         const input = document.getElementById('search-bar');
         const filter = input.value.toLowerCase();
         const table = document.getElementById('medicine-table');
         const rows = table.getElementsByTagName('tr');
 
-        for (let i = 1; i < rows.length; i++) { // Skip the header row
+        for (let i = 1; i < rows.length; i++) {
             const cells = rows[i].getElementsByTagName('td');
             let match = false;
 
