@@ -3,7 +3,7 @@
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="RxPress/static/Logo.png" alt="Logo" width="350" height="200">
   </a>
-  <p align="center"><i>The RxPress Medicine Pharmacy System is a Django-based web application designed to streamline pharmacy processes, including inventory management, order tracking, and customer interactions. It offers an intuitive user interface for both pharmacy staff and customers, making it easy to manage medicines, place orders, and track prescriptions.</i></p>
+  <p align="center"><i>The RxPress Medicine Pharmacy System is a Django-based web application designed to streamline pharmacy processes, including inventory management, order tracking, and customer interactions. It offers an intuitive user interface for both pharmacy staff and customers, making it easy to manage medicines and place orders.</i></p>
   <a href="https://github.com/berna-ahito/RxPress-A-Medicine-Pharmacy-System/stargazers"><img src="https://img.shields.io/github/stars/berna-ahito/RxPress-A-Medicine-Pharmacy-System" alt="Stars Badge"/></a>
 <a href="https://github.com/eynabdllh/pet-adoption-system/network/members"><img src="https://img.shields.io/github/forks/berna-ahito/RxPress-A-Medicine-Pharmacy-System" alt="Forks Badge"/></a>
 <a href="https://github.com/berna-ahito/RxPress-A-Medicine-Pharmacy-System/pulls"><img src="https://img.shields.io/github/issues-pr/berna-ahito/RxPress-A-Medicine-Pharmacy-System" alt="Pull Requests Badge"/></a>
