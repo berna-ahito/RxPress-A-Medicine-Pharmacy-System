@@ -3,15 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicine List</title>
+    <title>Admin Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
 <body>
-    <h1>Medicine List</h1>
-    <a href="{% url 'admin_dashboard:add_medicine' %}">Add New Medicine</a>
-    <ul>
-        {% for medicine in medicines %}
-            <li>{{ medicine.name }} - {{ medicine.category }} - {{ medicine.strength }} - ${{ medicine.price }} - Quantity: {{ medicine.quantity }}</li>
-        {% endfor %}
-    </ul>
+    <header>
+        <h1>RxPress Admin Dashboard</h1>
+        <nav>
+            <a href="#medicine-list">Medicine List</a>
+            <a href="{% url 'admin_dashboard:logout_user' %}">Logout</a>
+        </nav>
+    </header>
+    <div id="medicine-list" class="section">
+        <h3>Medicine List</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Strength</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medicine in medicines %}
+                <tr data-id="{{ medicine.id }}">
+                    <td class="editable" data-field="name">{{ medicine.name }}</td>
+                    <td class="editable" data-field="description">{{ medicine.description }}</td>
+                    <td class="editable" data-field="strength">{{ medicine.strength }}</td>
+                    <td class="editable" data-field="category">{{ medicine.category }}</td>
+                    <td class="editable" data-field="price">{{ medicine.price }}</td>
+                    <td class="editable" data-field="quantity">{{ medicine.quantity }}</td>
+                    <td>
+                        <button class="edit">Edit</button>
+                        <button class="done" style="display:none;">Done</button>
+                        <a href="{% url 'admin_dashboard:delete_medicine' medicine.id %}">
+                            <button class="delete">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div id="add-medicine" class="section">
+        <h3>Add Medicine</h3>
+        <form method="POST" action="{% url 'admin_dashboard:add_medicine' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Medicine</button>
+        </form>
+    </div>
+    <script>
+        document.querySelectorAll('.edit').forEach(button => {
+            button.addEventListener('click', function () {
+                const row = this.closest('tr');
+                const doneButton = row.querySelector('.done');
+                const editButton = this;
+
+                // Enable editing
+                row.querySelectorAll('.editable').forEach(cell => {
+                    const value = cell.textContent;
+                    cell.innerHTML = `<input type="text" value="${value}">`;
+                });
+
+                editButton.style.display = 'none';
+                doneButton.style.display = 'inline';
+            });
+        });
+
+        document.querySelectorAll('.done').forEach(button => {
+            button.addEventListener('click', function () {
+                const row = this.closest('tr');
+                const editButton = row.querySelector('.edit');
+                const doneButton = this;
+                const medicineId = row.dataset.id;
+                const updatedData = {};
+
+                // Collect edited data
+                row.querySelectorAll('.editable').forEach(cell => {
+                    const input = cell.querySelector('input');
+                    updatedData[cell.dataset.field] = input.value;
+                    cell.textContent = input.value;
+                });
+
+                fetch(`/update_medicine/${medicineId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: new URLSearchParams(updatedData)
+                }).then(response => {
+                    if (response.ok) {
+                        alert('Medicine updated successfully!');
+                    } else {
+                        alert('Error updating medicine');
+                    }
+                }).catch(error => console.error(error));
+
+                doneButton.style.display = 'none';
+                editButton.style.display = 'inline';
+            });
+        });
+    </script>
 </body>
 </html>
