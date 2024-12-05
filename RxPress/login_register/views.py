@@ -22,7 +22,7 @@ def login(request):
                         return redirect('admin_dashboard:medicine_list') 
                     else:
                         messages.success(request, 'Login successful!')
-                        return redirect('homepage:homepage')  
+                        return redirect('homepage:homepage')  # Redirecting to homepage app here
 
                 else:
                     messages.error(request, 'Invalid password.')

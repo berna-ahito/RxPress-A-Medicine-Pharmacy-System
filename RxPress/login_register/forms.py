@@ -30,16 +30,13 @@ class RegisterForm(forms.Form):
 
     def save(self):
         data = self.cleaned_data
+        # Create a new user instance
         user = User(
             first_name=data['first_name'],
             last_name=data['last_name'],
             username=data['username'],
             email=data['email'],
-<<<<<<< HEAD
-            password=make_password(data['password']), 
-=======
-            password=make_password(data['password']),  
->>>>>>> 0351f593192c0c46ce4d7da1e262560c46c990bf
+            password=make_password(data['password']),  # Hash the password
             user_type=data['user_type']
         )
         user.save()

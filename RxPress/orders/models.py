@@ -12,11 +12,11 @@ class Order(models.Model):
         return f"Order #{self.id} - {self.user.username}"
 
     def calculate_total_cost(self):
-        return sum(item.item_cost for item in self.items.all())  # Corrected to use 'items.all()' for related OrderItems
+        return sum(item.item_cost for item in self.items.all())  
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
-    medicine = models.ForeignKey('admin_dashboard.Medicine', on_delete=models.CASCADE)  # Added link to Medicine
+    medicine = models.ForeignKey('admin_dashboard.Medicine', on_delete=models.CASCADE)  
     quantity = models.PositiveIntegerField()
     item_cost = models.DecimalField(max_digits=10, decimal_places=2)
     
