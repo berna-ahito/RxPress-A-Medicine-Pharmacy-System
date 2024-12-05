@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from RxPress.login_register.views import logout
 from .models import Medicine
 from .forms import MedicineForm
 from django.contrib import messages
