@@ -1,7 +1,15 @@
+<<<<<<< HEAD
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
+from .models import Medicine
+=======
 from django.shortcuts import render, redirect
 from admin_dashboard.models import Medicine
+>>>>>>> 0351f593192c0c46ce4d7da1e262560c46c990bf
 from .forms import MedicineForm
 from django.contrib import messages
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 def add_medicine(request):
     if request.method == 'POST':
@@ -21,3 +29,39 @@ def medicine_list(request):
 
 def admin_dashboard(request):
     return render(request, 'medicine_list.html')
+<<<<<<< HEAD
+
+def medicine_list(request):
+    # Fetch all medicines from the database
+    medicines = Medicine.objects.all()
+    # Pass the medicines to the template
+    return render(request, 'medicine_list.html', {'medicines': medicines})
+
+def update_medicine(request, id):
+    if request.method == 'POST':
+        medicine = get_object_or_404(Medicine, id=id)
+        data = request.POST
+
+        medicine.name = data.get('name', medicine.name)
+        medicine.description = data.get('description', medicine.description)
+        medicine.strength = data.get('strength', medicine.strength)
+        medicine.category = data.get('category', medicine.category)
+        medicine.price = data.get('price', medicine.price)
+        medicine.quantity = data.get('quantity', medicine.quantity)
+        medicine.save()
+
+        return JsonResponse({'success': 'Medicine updated successfully!'})
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+def delete_medicine(request, id):
+    medicine = get_object_or_404(Medicine, id=id)
+    medicine.delete()
+    messages.success(request, "Medicine deleted successfully!")
+    return redirect('admin_dashboard')
+
+def logout_user(request):
+    logout(request)
+    return redirect('login_register:login')
+=======
+>>>>>>> 0351f593192c0c46ce4d7da1e262560c46c990bf
