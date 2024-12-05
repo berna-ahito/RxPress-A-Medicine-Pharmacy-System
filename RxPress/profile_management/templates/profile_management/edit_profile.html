@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - RxPress</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(500deg, #33ADF3, #1E5C7F);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Edit Profile Container */
+        .edit-profile-container {
+            max-width: 60%;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 10px;
+            background: linear-gradient(500deg, #EEF4F7, #DAF2FF);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .edit-profile-container h2 {
+            font-size: 25px;
+            color: #66727f;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .form-row label {
+            width: 120px;
+            font-weight: 500;
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        .form-row input[type="text"],
+        .form-row input[type="email"],
+        .form-row input[type="password"] {
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #37789e;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2784bb;
+        }
+
+        .cancel-button {
+            background-color: #ccc;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cancel-button:hover {
+            background-color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 class="logo">RxPress</h1>
+        <nav>
+            <a href="{% url 'homepage:homepage' %}">Home</a>
+            <a href="{% url 'profile_management:account' %}">Account</a>
+            <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
+            <a href="{% url 'orders:order_view' %}">Order</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </header>
+    <div class="edit-profile-container">
+        <h2>Edit Profile</h2>
+
+        {% if messages %}
+            <div id="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message flash-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'profile_management:edit_profile' %}">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" value="{{ form.first_name.value }}" required>
+            </div>
+
+            <div class="form-row">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" value="{{ form.last_name.value }}" required>
+            </div>
+        
+            <div class="form-row">
+                <label for="username">Username:</label>
+                <input type="text" name="username" value="{{ form.username.value }}" required>
+            </div>
+        
+            <div class="form-row">
+                <label for="email">Email:</label>
+                <input type="email" name="email" value="{{ form.email.value }}" required>
+            </div>
+        
+            <div class="form-row">
+                <label for="password">New Password:</label>
+                <input type="password" name="password" placeholder="Enter new password (leave blank to keep current)">
+            </div>
+        
+            <div class="form-row">
+                <label for="confirm_password">Confirm New Password:</label>
+                <input type="password" name="confirm_password" placeholder="Confirm new password">
+            </div>
+        
+            <div class="button-container">
+                <button type="submit">Save Changes</button>
+                <a href="{% url 'profile_management:account' %}" class="cancel-button">Cancel</a>
+            </div>
+        </form>        
+    </div>
+</body>
+
+</html>

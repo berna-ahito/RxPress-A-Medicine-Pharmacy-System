@@ -1,24 +1,11 @@
-# from django.urls import path
-# from . import views
-
-# app_name = 'pharmacy'
-
-# urlpatterns = [
-#     path('', views.homepage, name='homepage'),
-#     path('order', views.order_view, name='order_view'),
-    
-
-# ]
-
 from django.urls import path
-from . import views  # Import your views
+from . import views
 
-app_name = 'pharmacy'  # Namespacing the app URLs
+app_name = 'homepage'
 
 urlpatterns = [
-    path('', views.homepage, name='homepage'),  # Homepage route
-    path('order/', views.order_view, name='order_view'),  # Example route
+    path('homepage/', views.homepage, name='homepage'),  
     path('cart/', views.cart_view, name='cart_view'),
-    # path('add_to_cart/', views.add_to_cart, name='add_to_cart'),  # Add to Cart
-    
+    path('order/', views.order_view, name='order_view'),
+    path('logout/', views.logout_view, name='logout'),
 ]

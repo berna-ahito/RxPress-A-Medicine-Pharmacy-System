@@ -46,7 +46,11 @@
             
             <form method="post" action="{% url 'login_register:login' %}">
                 {% csrf_token %}
+<<<<<<< HEAD
                 {{ form.as_p }}
+=======
+                {{ form.as_p }} 
+>>>>>>> 0351f593192c0c46ce4d7da1e262560c46c990bf
                 <button type="submit">Login</button>
             </form>            
             <a style="color: #717784; font-family: 'Montserrat Alternates', sans-serif;">Don't have an account?</a>

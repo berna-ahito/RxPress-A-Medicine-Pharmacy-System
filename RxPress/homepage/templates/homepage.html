@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
@@ -13,7 +13,6 @@
         input[type="number"] {
             width: 60px;
         }
-
     </style>
 </head>
 <body>
@@ -22,82 +21,67 @@
     <br>
     <div class="nav-container">
         <nav>
-            <a href="{% url 'pharmacy:homepage' %}">Home</a>
-            <a href="{% url 'pharmacy:cart_view' %}">Shopping Cart</a>
-            <a href="{% url 'pharmacy:order_view' %}">Order</a>
+            <a href="{% url 'homepage:homepage' %}">Home</a>
+            <a href="{% url 'profile_management:account' %}">Account</a>
+            <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
+            <a href="{% url 'orders:order_view' %}">Order</a>
+            <a href="{% url 'logout' %}">Logout</a>
         </nav>
     </div>
 </header>
 
 <section>
     <h2 class="subtext">Medicine List</h2>
-
-    <!-- Search Bar -->
     <div>
         <input id="search-bar" type="text" placeholder="Search for medicines..." onkeyup="filterMedicines()">
     </div>
 
     <div class="container"> 
-        {% comment %} <form method="post" action="{% url 'pharmacy:add_to_cart' %}">
-            {% csrf_token %} {% endcomment %}
-        <table id="medicine-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Strength</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Bioflu</td>
-                    <td>Provides relief from flu and its multiple symptoms</td>
-                    <td>500mg</td>
-                    <td>Phenylephrine HCl (Nasal decongestant), Paracetamol</td>
-                    <td>₱9.00</td>
-                    <td><input type="number" name="quantity_1" value="1" min="1" required></td>
-                    <td><input type="checkbox" name="selected_items" value="1"></td>
-                </tr>
-                <tr>
-                    <td>Tuseran</td>
-                    <td>Relieves cough, colds, headache, and other ailments</td>
-                    <td>500mg</td>
-                    <td>Dextromethorphan HBr, Paracetamol</td>
-                    <td>₱10.50</td>
-                    <td><input type="number" name="quantity_2" value="1" min="1" required></td>
-                    <td><input type="checkbox" name="selected_items" value="2"></td>
-                </tr>
-                <tr>
-                    <td>Solmux</td>
-                    <td>For relief of cough with phlegm</td>
-                    <td>500mg</td>
-                    <td>Carbocisteine</td>
-                    <td>₱12.00</td>
-                    <td><input type="number" name="quantity_3" value="1" min="1" required></td>
-                    <td><input type="checkbox" name="selected_items" value="3"></td>
-                </tr>
-            </tbody>
-        </table>
+        <form method="post" action="{% url 'shopping_cart:add_to_cart' %}">
+            {% csrf_token %}
+            <table id="medicine-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Strength</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for medicine in medicines %}
+                        <tr>
+                            <td>{{ medicine.name }}</td>
+                            <td>{{ medicine.description }}</td>
+                            <td>{{ medicine.strength }}</td>
+                            <td>{{ medicine.category }}</td>
+                            <td>₱{{ medicine.price }}</td>
+                            <td><input type="number" name="quantity_{{ medicine.id }}" value="1" min="1" required></td>
+                            <td><input type="checkbox" name="selected_items" value="{{ medicine.id }}"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>                
+            </table>
+            <br>
+            <div style="text-align: center;">
+                <button type="submit">Add Selected to Cart</button>
+            </div>
+        </form>
         <br>
-        <div style="text-align: center;">
-            <button type="submit">Add Selected to Cart</button>
-        </div>
     </div> 
 </section>
 
 <script>
-    // JavaScript function to filter medicines
     function filterMedicines() {
         const input = document.getElementById('search-bar');
         const filter = input.value.toLowerCase();
         const table = document.getElementById('medicine-table');
         const rows = table.getElementsByTagName('tr');
 
-        for (let i = 1; i < rows.length; i++) { // Skip the header row
+        for (let i = 1; i < rows.length; i++) {
             const cells = rows[i].getElementsByTagName('td');
             let match = false;
 

@@ -1,14 +1,11 @@
-# profile_management/forms.py
 from django import forms
 from django.contrib.auth.models import User
 
 class UserProfileForm(forms.ModelForm):
-    # You can add additional fields if needed in the form
     class Meta:
         model = User
-        fields = ['first_name', 'username', 'password']  # You can add other fields like email if necessary
+        fields = ['first_name', 'username', 'password']  
         
-    # This will add password confirmation for validation
     password_confirm = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
     
     def clean(self):

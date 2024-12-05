@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'index.css' %}">
 </head>
 <body>
+<<<<<<< HEAD
     <header>
         <h1>RxPress Admin Dashboard</h1>
         <nav>
@@ -111,5 +112,19 @@
             });
         });
     </script>
+=======
+    <h1>Medicine List</h1>
+    <a href="{% url 'admin_dashboard:add_medicine' %}">Add New Medicine</a>
+    <ul>
+        {% for medicine in medicines %}
+            <li>{{ medicine.name }} - {{ medicine.category }} - {{ medicine.strength }} - ${{ medicine.price }} - Quantity: {{ medicine.quantity }}</li>
+        {% endfor %}
+    </ul>
+    
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+>>>>>>> 0351f593192c0c46ce4d7da1e262560c46c990bf
 </body>
 </html>

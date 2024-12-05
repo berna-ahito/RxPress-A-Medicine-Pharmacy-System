@@ -35,7 +35,11 @@ class RegisterForm(forms.Form):
             last_name=data['last_name'],
             username=data['username'],
             email=data['email'],
+<<<<<<< HEAD
             password=make_password(data['password']), 
+=======
+            password=make_password(data['password']),  
+>>>>>>> 0351f593192c0c46ce4d7da1e262560c46c990bf
             user_type=data['user_type']
         )
         user.save()

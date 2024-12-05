@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +7,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="{% static 'index.css' %}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(500deg, #33ADF3, #1E5C7F);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Shopping Cart Styling */
+        #cart {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(500deg, #EEF4F7, #DAF2FF);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #33ADF3;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .empty-cart-message {
+            color: #66727f;
+            font-size: 18px;
+        }
+
+        .update-cart-btn, .place-order-btn {
+            background-color: #37789e;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-cart-btn:hover, .place-order-btn:hover {
+            background-color: #2784bb;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 8px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
 </head>
 <body>
+
+<header>
+    <h1 class="logo">CartList</h1>
+    <nav>
+        <a href="{% url 'homepage:homepage' %}">Home</a>
+        <a href="{% url 'profile_management:account' %}">Account</a>
+        <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
+        <a href="{% url 'orders:order_view' %}">Order</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+</header>
+
 <section id="cart">
     <div class="container">
         <h1>Shopping Cart</h1>
         {% if cart_items %}
-        <form method="post" action="{% url 'shopping_cart:update_cart' %}">
+        <form method="post">
             {% csrf_token %}
             <table>
                 <thead>
@@ -26,68 +150,34 @@
                 <tbody>
                     {% for cart_item in cart_items %}
                         <tr id="cart-item-{{ cart_item.id }}">
-                            <td>{{ cart_item.name }}</td>
+                            <td>{{ cart_item.medicine.name }}</td>
                             <td>
-                                <input type="number" name="quantity_{{ cart_item.id }}" value="{{ cart_item.quantity }}" min="1" required>
+                                <form method="post" action="{% url 'shopping_cart:update_cart' item_id=cart_item.id %}">
+                                    {% csrf_token %}
+                                    {{ form.quantity }}
+                                    <button type="submit" class="update-btn">Update</button>
+                                </form>
                             </td>
-                            <td>₱{{ cart_item.price|floatformat:2 }} x {{ cart_item.quantity }} = ₱{{ cart_item.total_cost|floatformat:2 }}</td>
+                            <td>₱{{ cart_item.medicine.price|floatformat:2 }} x {{ cart_item.quantity }} = ₱{{ cart_item.total_cost|floatformat:2 }}</td>
                             <td>
-                                <button type="button" class="delete-btn" data-medicine-id="{{ cart_item.id }}">Delete</button>
+                                <form method="post" action="{% url 'shopping_cart:remove_from_cart' item_id=cart_item.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="delete-btn">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <!-- Add Update Button to Submit the Form -->
-            <button type="submit" class="update-cart-btn">Update Cart</button>
             <p>Total Cost: <strong>₱{{ total_cost|floatformat:2 }}</strong></p>
         </form>
-
-        <form action="{% url 'shopping_cart:place_order' %}" method="post">
-            {% csrf_token %}
-            <br>
-            <button type="submit" class="place-order-btn">Place Order</button>
-        </form>
-
         {% else %}
-        <p class="empty-cart-message">Your shopping cart is empty.</p>
+            <p class="empty-cart-message">Your shopping cart is empty.</p>
         {% endif %}
     </div>
 </section>
 
 <script src="{% static 'index.js' %}"></script>
-<script>
-    // Handle AJAX delete
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const medicineId = this.getAttribute('data-medicine-id');
-
-            // Send AJAX request to remove item
-            fetch("{% url 'shopping_cart:remove_from_cart' %}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'
-                },
-                body: JSON.stringify({
-                    'medicine_id': medicineId
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Remove the item row from the table
-                    document.getElementById(`cart-item-${medicineId}`).remove();
-                    // Update the total cost displayed on the page
-                    document.querySelector('p strong').textContent = `₱${data.total_cost}`;
-                    alert(data.message);  // Show success message
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            });
-        });
-    });
-</script>
 
 </body>
 </html>

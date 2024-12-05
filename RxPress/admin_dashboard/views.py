@@ -1,36 +1,35 @@
+<<<<<<< HEAD
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Medicine
+=======
+from django.shortcuts import render, redirect
+from admin_dashboard.models import Medicine
+>>>>>>> 0351f593192c0c46ce4d7da1e262560c46c990bf
 from .forms import MedicineForm
-from django.template import TemplateDoesNotExist, loader
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
-# View to display the list of medicines
-def medicine_list(request):
-    try:
-        template = loader.get_template('medicine_list.html')
-    except TemplateDoesNotExist:
-        print("Template not found")
-        raise
-    return render(request, 'medicine_list.html')
-
-# View to handle adding a new medicine
 def add_medicine(request):
     if request.method == 'POST':
         form = MedicineForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the new medicine to the database
-            messages.success(request, "Medicine added!")  # Add a success message
-            form = MedicineForm()
+            form.save()  
+            messages.success(request, "Medicine added!")  
+            return redirect('admin_dashboard:medicine_list')  
     else:
         form = MedicineForm()
-    
+
     return render(request, 'add_medicine.html', {'form': form})
+
+def medicine_list(request):
+    medicines = Medicine.objects.all()  
+    return render(request, 'medicine_list.html', {'medicines': medicines})
 
 def admin_dashboard(request):
     return render(request, 'medicine_list.html')
+<<<<<<< HEAD
 
 def medicine_list(request):
     # Fetch all medicines from the database
@@ -64,3 +63,5 @@ def delete_medicine(request, id):
 def logout_user(request):
     logout(request)
     return redirect('login_register:login')
+=======
+>>>>>>> 0351f593192c0c46ce4d7da1e262560c46c990bf
