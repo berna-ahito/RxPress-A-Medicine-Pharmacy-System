@@ -7,16 +7,16 @@ def add_medicine(request):
     if request.method == 'POST':
         form = MedicineForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the new medicine to the database
-            messages.success(request, "Medicine added!")  # Success message
-            return redirect('admin_dashboard:medicine_list')  # Redirect to the medicine list after adding
+            form.save()  
+            messages.success(request, "Medicine added!")  
+            return redirect('admin_dashboard:medicine_list')  
     else:
         form = MedicineForm()
 
     return render(request, 'add_medicine.html', {'form': form})
 
 def medicine_list(request):
-    medicines = Medicine.objects.all()  # Fetch all medicines from the database
+    medicines = Medicine.objects.all()  
     return render(request, 'medicine_list.html', {'medicines': medicines})
 
 def admin_dashboard(request):

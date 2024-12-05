@@ -21,7 +21,6 @@
         }
     </style>
 
-    <!-- Display success or error messages -->
 {% if messages %}
 <ul>
     {% for message in messages %}
@@ -30,8 +29,6 @@
 </ul>
 {% endif %}
 
-
-    <!-- Medicine form -->
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -41,15 +38,15 @@
     <a href="{% url 'admin_dashboard:medicine_list' %}">Back to Medicine List</a>
 
     <script>
-        // Automatically hide messages after 3 seconds
+
         document.addEventListener('DOMContentLoaded', function () {
             const flashMessages = document.getElementById('flash-messages');
             if (flashMessages) {
                 setTimeout(() => {
                     flashMessages.style.transition = 'opacity 1s';
                     flashMessages.style.opacity = '0';
-                    setTimeout(() => flashMessages.remove(), 1000); // Remove from DOM after fading out
-                }, 3000); // Wait for 3 seconds
+                    setTimeout(() => flashMessages.remove(), 1000); 
+                }, 3000); 
             }
         });
     </script>
