@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from admin_dashboard.models import Medicine
 from .models import Cart, CartItem
 from .forms import CartItemForm
 from django.http import JsonResponse
@@ -25,13 +26,13 @@ def update_cart(request, item_id):
         form = CartItemForm(request.POST, instance=cart_item)
 
         if form.is_valid():
-            form.save()  # Save the updated quantity and total cost
+            form.save()
             messages.success(request, "Cart updated successfully!")
             return redirect('shopping_cart:cart_view')
         else:
             messages.error(request, "Failed to update cart. Please check the quantity.")
-
-    return redirect('shopping_cart:cart_view')  # In case of GET request or failed form submission
+    
+    return redirect('shopping_cart:cart_view')
 
 def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)

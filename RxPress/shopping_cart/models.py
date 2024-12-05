@@ -9,21 +9,20 @@ class Cart(models.Model):
     def __str__(self):
         return f"{self.user.username}'s cart"
     
-    # Method to update the total cost of the cart
     def update_total_cost(self):
-        self.total_cost = sum(item.total_cost for item in self.cartitems.all())  # Corrected to 'cartitems'
+        self.total_cost = sum(item.total_cost for item in self.cartitems.all())  
         self.save()
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cartitems')
     medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2, editable=False, default=0.00)  # Added default value
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, editable=False, default=0.00) 
 
     def save(self, *args, **kwargs):
-        self.total_cost = self.medicine.price * self.quantity  # Recalculate the total cost
+        self.total_cost = self.medicine.price * self.quantity  
         super().save(*args, **kwargs)
-        self.cart.update_total_cost()  # Update total cost in the associated cart
+        self.cart.update_total_cost() 
 
     def __str__(self):
         return f"{self.medicine.name} in {self.cart.user.username}'s cart"

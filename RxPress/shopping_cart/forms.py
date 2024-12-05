@@ -4,7 +4,7 @@ from .models import CartItem
 class CartItemForm(forms.ModelForm):
     class Meta:
         model = CartItem
-        fields = ['quantity']  # We only want to update the quantity
+        fields = ['quantity']  
 
     def clean_quantity(self):
         quantity = self.cleaned_data.get('quantity')
