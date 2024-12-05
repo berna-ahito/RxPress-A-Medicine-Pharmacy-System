@@ -69,19 +69,20 @@
             <div style="text-align: center;">
                 <button type="submit">Add Selected to Cart</button>
             </div>
-        </form>
+        </form>        
         <br>
     </div> 
 </section>
 
 <script>
+    // JavaScript function to filter medicines
     function filterMedicines() {
         const input = document.getElementById('search-bar');
         const filter = input.value.toLowerCase();
         const table = document.getElementById('medicine-table');
         const rows = table.getElementsByTagName('tr');
 
-        for (let i = 1; i < rows.length; i++) {
+        for (let i = 1; i < rows.length; i++) { // Skip the header row
             const cells = rows[i].getElementsByTagName('td');
             let match = false;
 

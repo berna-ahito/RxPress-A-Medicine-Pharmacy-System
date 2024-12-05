@@ -34,6 +34,7 @@
             </a>
         </div>
         <div class="login-form-container">
+            <!-- Display flash messages -->
             {% if messages %}
                 <div id="flash-messages">
                     {% for message in messages %}
@@ -43,8 +44,12 @@
                     {% endfor %}
                 </div>
             {% endif %}
+
+            <!-- Form Start -->
             <form method="post" action="{% url 'login_register:signup' %}">
                 {% csrf_token %}
+                
+                <!-- First Name Field -->
                 <div class="form-group">
                     {{ form.first_name.label_tag }}
                     {{ form.first_name }}
@@ -56,6 +61,8 @@
                         </ul>
                     {% endif %}
                 </div>
+                
+                <!-- Last Name Field -->
                 <div class="form-group">
                     {{ form.last_name.label_tag }}
                     {{ form.last_name }}
@@ -67,6 +74,8 @@
                         </ul>
                     {% endif %}
                 </div>
+
+                <!-- Username Field -->
                 <div class="form-group">
                     {{ form.username.label_tag }}
                     {{ form.username }}
@@ -78,6 +87,8 @@
                         </ul>
                     {% endif %}
                 </div>
+
+                <!-- Email Field -->
                 <div class="form-group">
                     {{ form.email.label_tag }}
                     {{ form.email }}
@@ -89,6 +100,8 @@
                         </ul>
                     {% endif %}
                 </div>
+
+                <!-- Password Field -->
                 <div class="form-group">
                     {{ form.password.label_tag }}
                     {{ form.password }}
@@ -100,6 +113,8 @@
                         </ul>
                     {% endif %}
                 </div>
+
+                <!-- Confirm Password Field -->
                 <div class="form-group">
                     {{ form.confirm_password.label_tag }}
                     {{ form.confirm_password }}
@@ -111,16 +126,10 @@
                         </ul>
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    <label for="user_type" style="color: #106BA3; font-family: 'Montserrat Alternates', sans-serif;">User Type:</label>
-                    <select id="user_type" name="user_type" style="font-family: 'Montserrat Alternates', sans-serif;">
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-
+                
                 <button type="submit">Sign Up</button>
             </form>
+            <!-- Display general errors -->
             {% if form.errors %}
                 <div class="error-messages">
                     <p style="color: red;">There were errors with your submission:</p>
@@ -133,6 +142,8 @@
                     </ul>
                 </div>
             {% endif %}
+
+            <!-- Login Link -->
             <a style="color: #717784; font-family: 'Montserrat Alternates', sans-serif;">Already have an account?</a>
             <a href="{% url 'login_register:login' %}" style="color: #106BA3; text-decoration: underline; font-family: 'Montserrat Alternates', sans-serif;">Login</a>
         </div>            

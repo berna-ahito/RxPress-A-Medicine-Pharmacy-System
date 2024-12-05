@@ -1,8 +1,27 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import LoginForm, RegisterForm
-from django.contrib.auth.hashers import check_password 
-from .models import User
+from django.contrib.auth.hashers import check_password, make_password
+from .models import User  
+
+def create_default_superuser():
+    try:
+        # Check if a superuser already exists with the given email or username
+        if not User.objects.filter(username='rxpress').exists():
+            admin = User(
+                username='rxpress',
+                first_name='Admin',
+                last_name='User',
+                email='admin@rxpress.com',
+                password=make_password('rxpress123'),  # Hashed password
+                is_superuser=True
+            )
+            admin.save()
+            print("Default superuser created successfully.")
+        else:
+            print("Superuser already exists.")
+    except Exception as e:
+        print(f"Error creating default superuser: {e}")
 
 def login(request):
     if request.method == 'POST':
@@ -15,15 +34,11 @@ def login(request):
                 if check_password(password, user.password):
                     request.session['id'] = user.id
                     request.session['username'] = user.username
-                    request.session['user_type'] = user.user_type
-
-                    if user.user_type == 'admin':
-                        messages.success(request, 'Welcome, Admin!')
-                        return redirect('admin_dashboard:medicine_list') 
+                    messages.success(request, 'Login successful!')
+                    if user.is_superuser: 
+                        return redirect('admin_dashboard:medicine_list')  # Redirect to your custom admin dashboard
                     else:
-                        messages.success(request, 'Login successful!')
-                        return redirect('homepage:homepage')  
-
+                        return redirect('homepage:homepage')
                 else:
                     messages.error(request, 'Invalid password.')
             except User.DoesNotExist:
@@ -39,6 +54,7 @@ def signup(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+
             if User.objects.filter(username=data['username']).exists():
                 messages.error(request, 'Username already exists. Please choose another.')
                 return render(request, 'signup.html', {'form': form})
@@ -47,7 +63,16 @@ def signup(request):
                 messages.error(request, 'Email already exists. Please choose another.')
                 return render(request, 'signup.html', {'form': form})
 
-            user = form.save()
+            # Create and save the new user
+            user = User(
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                username=data['username'],
+                email=data['email'],
+                password=make_password(data['password']),  # Encrypt the password
+                is_superuser=False  # Default to a regular user; adjust as needed
+            )
+            user.save()
             messages.success(request, 'User created successfully! You can now log in.')
             return redirect('login_register:login')
         else:
@@ -57,9 +82,9 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 def logout(request):
-    request.session.clear()  
+    request.session.clear()
     messages.success(request, 'You have been logged out.')
-    return redirect('login') 
+    return redirect('login')  # Adjust the URL name as needed
 
 def onboarding(request):
     return render(request, 'onboarding.html')

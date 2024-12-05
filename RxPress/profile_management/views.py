@@ -23,6 +23,7 @@ def account(request):
 
 @login_required
 def edit_profile(request):
+    print("Logged in user:", request.user.username)  # Debugging line
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=request.user)
         
@@ -35,10 +36,11 @@ def edit_profile(request):
 
         if form.is_valid():
             user = form.save(commit=False)
-
+            
             if password:
                 user.set_password(password)
             user.save()
+
             if password:
                 logout(request)
                 messages.success(request, 'Your password has been updated. Please log in again.')
@@ -51,5 +53,7 @@ def edit_profile(request):
         form = UserProfileForm(instance=request.user)
 
     return render(request, 'profile_management/edit_profile.html', {'form': form})
+
+
 
 
