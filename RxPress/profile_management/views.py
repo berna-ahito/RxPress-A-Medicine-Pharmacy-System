@@ -16,13 +16,11 @@ def profile_view(request):
 @login_required
 def account(request):
     if request.method == 'POST':
-        # Use the user's profile, not the user directly
         form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
         if form.is_valid():
             form.save()
             return redirect('profile_management:profile_view')  
     else:
-        # Pass the profile to the form for initial population
         form = UserProfileForm(instance=request.user.userprofile)
     
     return render(request, 'profile_management/account.html', {'form': form})
@@ -34,21 +32,18 @@ def edit_profile(request):
     if request.method == "POST":
         form = UserProfileForm(request.POST, request.FILES, instance=profile, user=request.user)
         if form.is_valid():
-            old_password = request.user.password  # Store the current password
-            new_password = request.POST.get('password', '').strip()  # Get the new password, if provided
+            old_password = request.user.password  
+            new_password = request.POST.get('password', '').strip()  
 
-            # Save changes to the user and profile
             form.save(user=request.user)
 
-            # Check if the password field has input
             if new_password:
-                # Check if the password has changed
                 if old_password != new_password:
                     logout(request)
                     return redirect('login_register:login')
             return redirect('profile_management:account')
     else:
-        form = UserProfileForm(instance=profile, user=request.user)  # Pre-fill the form
+        form = UserProfileForm(instance=profile, user=request.user)  
 
     return render(request, 'profile_management/edit_profile.html', {'form': form})
 

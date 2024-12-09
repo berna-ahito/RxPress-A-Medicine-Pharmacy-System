@@ -68,12 +68,11 @@ def order_confirmation(request):
     total_cost = request.GET.get('total_cost')
 
     if total_cost:
-        total_cost = float(total_cost)  # Ensure it's a float for the template
+        total_cost = float(total_cost)
     else:
         total_cost = 0.00
 
-    # Get the latest order for the logged-in user
-    order = Order.objects.filter(user=request.user).order_by('-created_at').first()  # Assuming 'created_at' is the field that indicates when the order was created
+    order = Order.objects.filter(user=request.user).order_by('-created_at').first() 
 
     return render(request, 'shopping_cart/order_confirmation.html', {
         'order': order,
