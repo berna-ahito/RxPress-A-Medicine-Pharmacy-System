@@ -30,35 +30,64 @@ body {
 
 .onboarding-screen {
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    justify-content: flex-start; /* Align children at the top */
-    align-items: center; /* Center children horizontally */
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
     height: 100%;
     text-align: center;
     color: white;
-    background: url('../static/onboarding_bg.png') no-repeat center center fixed;
+    /*background: url('../static/onboarding_bg.png')*/
     background-size: cover;
-    position: relative; /* Maintain relative positioning for child elements */
+    position: relative; 
     overflow: hidden;
     z-index: 0;
 }
 
+/*.onboarding-screen {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
+    height: 100%;
+    text-align: center;
+    color: white;
+    position: relative; 
+    overflow: hidden;
+    z-index: 0;
+} */
+
+.onboarding-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background: url('../static/background.png');
+    opacity: 0.5; /* Adjust opacity here (0.0 to 1.0) */
+    z-index: -0; /* Ensure it stays behind the content */
+}
+
 .onboarding-logo {
-    max-width: 80%;
-    height: auto;
-    margin-top: 50px; /* Space from the top */
+    max-width: 100%;
+    height: 400px;
+    margin-top: 220px; /* Space from the top */
     z-index: 0; /* Ensure it appears above other elements */
+    position: relative; /* Position relative to adjust its left placement */
+    left: -450px; /* Move the logo to the left by 20px (adjust as needed) */
 }
 
 .onboarding-container {
-    margin-top: 290px; /* Space below the logo */
-    padding: 40px;
-    border-radius: 10px;
     width: 90%;
     max-width: 1000px;
+    margin-top: -260px;
     display: flex; 
     flex-direction: column; 
     gap: 20px;
+    z-index: 0; 
+    position: relative; 
+    left: 300px; /*Move to the right*/
 }
 
 h2{
@@ -80,9 +109,14 @@ p{
 
 .button-container {
     display: flex;              /* Use flexbox */
-    flex-direction: column;     /* Align items vertically */
-    align-items: center;        /* Center items horizontally */
-    gap: 20px;                  /* Space between buttons */
+    flex-direction: row ;     /* Align items vertically */
+    gap: 50px;                  /* Space between buttons */
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    z-index: 0; /* Ensure it appears above other elements */
+    position: relative; /* Position relative to adjust its left placement */
+    left: 270px; /* Move the logo to the left by 20px (adjust as needed) */
 }
 
 .button {
@@ -118,6 +152,7 @@ p{
 }
 
 .login-screen {
+
     position: fixed; /* Fixed positioning */
     top: 0; /* Align to the top */
     left: 0; /* Align to the left */
@@ -240,36 +275,193 @@ p{
     background-color: #185a94; /* Hover color for the button */
 }
 
-/* Flash Message Styling */
+/* General Flash Message Styling */
 .flash-message {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+    padding: 15px;
+    margin: 15px auto;
+    border-radius: 8px;
     text-align: center;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700; /* Make the text bold */
+    width: 90%; /* Adjust width to fit better in smaller containers */
+    max-width: 600px; /* Limit max width for better readability */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow for emphasis */
 }
 
+.flash-message flash {
+    padding: 15px;
+    margin: 15px auto;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700; /* Make the text bold */
+    width: 90%; /* Adjust width to fit better in smaller containers */
+    max-width: 600px; /* Limit max width for better readability */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow for emphasis */
+}
+
+/* Success Messages */
 .flash-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background-color: #28a745; /* Bright green for success */
+    color: #ffffff; /* White text for contrast */
+    border: 1px solid #1d7a32; /* Dark green border */
 }
 
+/* Error Messages */
 .flash-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+    background-color: #dc3545; /* Bright red for errors */
+    color: #ffffff; /* White text for contrast */
+    border: 1px solid #b21f2d; /* Dark red border */
 }
 
+/* Warning Messages */
 .flash-warning {
-    background-color: #fff3cd;
-    color: #856404;
-    border: 1px solid #ffeeba;
+    background-color: #ffc107; /* Bright yellow for warnings */
+    color: #856404; /* Dark text for visibility */
+    border: 1px solid #e0a800; /* Golden border */
 }
 
-.flash-danger{
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+/* Danger Messages */
+.flash-danger {
+    background-color: #f44336; /* Vibrant red for critical errors */
+    color: #ffffff; /* White text for contrast */
+    border: 1px solid #c62828; /* Dark red border */
 }
+
+.form-group {
+    margin-bottom: 20px; /* Adjust spacing between fields */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px; /* Space between label and input */
+    font-weight: bold; /* Optional: makes the label stand out */
+}
+
+.form-group input {
+    width: 100%; /* Ensure fields span the full width of the container */
+    padding: 10px; /* Adjust padding inside the input */
+    border: 1px solid #ccc; /* Define border */
+    border-radius: 5px; /* Optional: round corners */
+    font-size: 16px; /* Adjust text size */
+}
+
+button[type="submit"] {
+    margin-top: 20px; /* Add spacing above the submit button */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #106BA3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0e5a8a; /* Darken button color on hover */
+}
+
+/* Navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(214, 246, 252);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #106BA3;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 700;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #083D77;
+}
+
+/* Section styles */
+
+.contact-us {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+    margin-top: 60px;
+    /*background-image: ;*/
+}
+
+
+.contact-us h2 {
+    color: #106BA3;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+
+.contact-us p {
+    color: #717784;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 15px 0;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 14px;
+    color: #717784;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Who We Are Section */
+.who-we-are .who-we-are {
+    width: 100%; /* Make it span the full width */
+    height: 60%;
+    padding: 80px 20px; /* Adjust padding for spacing */
+    background-color: #F0FAFF; /* Match background color */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+}
+
+.who-we-are .content-container {
+    max-width: 100%; /* Restrict content width for readability */
+    text-align: center;
+    padding: 390px; /* Add padding around the content */
+    background-color: #ffffff; /* Add a white background to make it distinct */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.who-we-are h2 {
+    font-size: 32px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 700;
+    color: #106BA3;
+    margin-bottom: 20px;
+}
+
+.who-we-are p {
+    font-size: 18px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 400;
+    color: #717784;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+
+
+
+
