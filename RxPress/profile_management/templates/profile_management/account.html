@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RxPress - Profile</title>
+    <!-- <link rel="stylesheet" href="{% static 'homepage.css' %}"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
+    <style>
+    
+    body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(500deg, #33ADF3, #1E5C7F);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif; 
+            margin: 0; 
+        }
+        
+        .nav-container nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            padding: 5px 10px; 
+            border-radius: 5px; 
+            transition: background-color 0.3s ease, color 0.3s ease; 
+        }
+        
+        nav a:hover {
+            background-color: #33ADF3; 
+            color: white; 
+        }
+        
+        
+        /* Profile Container */
+        .profile-container {
+            max-width: 90%;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(500deg, #EEF4F7, #DAF2FF);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-container h2 {
+            font-size: 25px;
+            color: #66727f;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .profile-details {
+            font-size: 18px;
+            color: #66727f;
+            margin-bottom: 25px;
+        }
+
+        .edit-button {
+            background-color: #37789e;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #2784bb;
+        }
+
+        .profile-picture {
+            width: 200px; /* Adjusted size */
+            height: 200px; /* Adjusted size */
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo_background-logo {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            object-fit: cover; 
+            opacity: 0.5; 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+        }
+        
+        .LogoWithoutText-logo {
+            position: fixed; 
+            bottom: 20px;
+            left: 10px; 
+            width: 250px; 
+            height: 120px; 
+            z-index: 10; 
+            opacity: 1.0; /
+        }
+        
+        #search-bar, .container, header, footer {
+            position: relative;
+            z-index: 1; 
+        }
+    </style>
+</head>
+
+<body>
+    <img src="{% static 'logo_background.png' %}" alt="Background" class="logo_background-logo">
+    <img src="{% static 'LogoWithoutText.png' %}" alt="Logo" class="LogoWithoutText-logo">
+    <header>
+        <h1 class="logo">Profile</h1>
+        <nav>
+            <a href="{% url 'homepage:homepage' %}">Home</a>
+            <a href="{% url 'profile_management:account' %}">Account</a>
+            <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
+            <a href="{% url 'orders:order_view' %}">Order</a>
+            <a href="{% url 'profile_management:logout_user' %}">Logout</a>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <h2>Welcome, {{ request.user.first_name }}!</h2>
+        <div class="profile-details">
+            {% if user.userprofile.profile_picture %}
+                <img src="{{ user.userprofile.profile_picture.url }}" alt="Profile Picture" class="profile-picture"/>
+            {% else %}
+                <img src="{% static 'default-profile.png' %}" alt="Default Profile Picture" class="profile-picture"/>
+            {% endif %}
+            <p><strong>Name:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Username:</strong> {{ request.user.username }}</p>
+        </div>
+        <form action="{% url 'profile_management:edit_profile' %}" method="get">
+            <button type="submit" class="edit-button">Edit Profile</button>
+        </form>
+    </div>
+</body>
+
+</html>

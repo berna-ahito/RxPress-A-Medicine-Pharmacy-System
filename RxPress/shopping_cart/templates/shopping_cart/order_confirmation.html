@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation</title>
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
     <style>
         body {
@@ -35,18 +35,23 @@
         }
 
         nav a {
-            color: white;
             margin: 0 15px;
             text-decoration: none;
-            font-size: 16px;
+            color: white;
             font-weight: 500;
+            padding: 5px 10px; /* Add padding for the button effect */
+            border-radius: 5px; /* Round the corners */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
         }
-
+        
         nav a:hover {
-            text-decoration: underline;
+            background-color: #33ADF3; /* Add a background color on hover */
+            color: white; /* Change text color on hover */
         }
 
         .confirmation-message {
+            width: 1000px;
+            height: 200px;
             margin-top: 50px;
             padding: 20px;
             text-align: center;
@@ -54,6 +59,7 @@
             border-radius: 5px;
             color: #155724;
             font-size: 18px;
+            justify-self: center;
         }
 
         .confirmation-message p {
@@ -64,9 +70,40 @@
             font-size: 22px;
             color: #28a745;
         }
+        .logo_background-logo {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            object-fit: cover; 
+            opacity: 0.5; 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+        }
+        
+        .LogoWithoutText-logo {
+            position: fixed; 
+            bottom: 20px;
+            left: 10px; 
+            width: 250px; 
+            height: 120px; 
+            z-index: 10; 
+            opacity: 1.0; /
+        }
+        
+        #search-bar, .container, header, footer {
+            position: relative;
+            z-index: 1; 
+        }
     </style>
 </head>
 <body>
+
+    <img src="{% static 'logo_background.png' %}" alt="Background" class="logo_background-logo">
+    <img src="{% static 'LogoWithoutText.png' %}" alt="Logo" class="LogoWithoutText-logo">
 
 <header>
     <h1 class="logo">CartList</h1>
@@ -75,15 +112,14 @@
         <a href="{% url 'profile_management:account' %}">Account</a>
         <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
         <a href="{% url 'orders:order_view' %}">Order</a>
-        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'shopping_cart:logout_user' %}">Logout</a>
     </nav>
 </header>
 
 <section class="confirmation-message">
+    <p><strong>Order Id #{{ order.id }}</strong></p>
     <p>Thank you for your order!</p>
-    <p>Your purchase has been successfully completed.</p>
     <p>Please prepare <strong>₱{{ total_cost|floatformat:2 }}</strong> upon receiving your order.</p>
 </section>
-
 </body>
 </html>
