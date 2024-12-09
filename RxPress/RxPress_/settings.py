@@ -28,8 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -67,7 +65,8 @@ TEMPLATES = [
             BASE_DIR / 'profile_management/templates',
             BASE_DIR / 'login_register/templates', 
             BASE_DIR / 'orders/templates',
-            BASE_DIR / 'shopping_cart/templates',  # Add this line
+            BASE_DIR / 'shopping_cart/templates',
+            BASE_DIR / 'orders/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -120,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Manila'
 
 USE_I18N = True
 
@@ -140,10 +139,11 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # In settings.py
-LOGIN_REDIRECT_URL = '/homepage/' 
 
-LOGOUT_REDIRECT_URL = 'login_register:onboarding'  
+SESSION_COOKIE_AGE = 3600  # Time in seconds (e.g., 1 hour)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Expire session when browser closes
+LOGOUT_REDIRECT_URL = 'login_register:onboarding'
+LOGIN_URL = 'login_register:login' 
 
-
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
