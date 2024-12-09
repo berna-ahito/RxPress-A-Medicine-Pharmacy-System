@@ -4,6 +4,7 @@ from shopping_cart.models import CartItem
 from django.contrib import messages
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
+from login_register.views import logout
 
 @login_required
 def checkout(request):
@@ -12,7 +13,6 @@ def checkout(request):
 
     # Check if the cart is empty
     if not cart_items:
-        messages.error(request, "Your cart is empty.")
         return redirect('shopping_cart:cart_view')
 
     # Calculate the total cost of the cart items
@@ -34,13 +34,22 @@ def checkout(request):
     cart_items.delete()
 
     # Success message and redirect to the order list
-    messages.success(request, "Your order has been placed successfully.")
     return redirect('orders:order_view')
 
 @login_required
 def order_view(request):
-    # Get orders for the current user, ordered by creation date (newest first)
-    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    # Check if the user is an admin (superuser)
+    if request.user.is_superuser:
+        # Get all orders for all customers, ordered by creation date (newest first)
+        orders = Order.objects.all().order_by('-created_at')
+    else:
+        # Get orders only for the current user if not an admin
+        orders = Order.objects.filter(user=request.user).order_by('-created_at')
 
     # Pass the orders to the template
     return render(request, 'orders/orders.html', {'orders': orders})
+
+@login_required
+def logout_user(request):
+    logout(request)
+    return redirect('login_register:onboarding')

@@ -10,12 +10,151 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
     <style>
-        input[type="number"] {
-            width: 60px;
+
+
+
+body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .company-name {
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(500deg, #33ADF3, #1E5C7F);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px; /* Add padding for the button effect */
+            border-radius: 5px; /* Round the corners */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+        }
+        
+        nav a:hover {
+            background-color: #33ADF3; /* Add a background color on hover */
+            color: white; /* Change text color on hover */
+        }
+
+        .subtext {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5rem;
+        }
+
+        #search-bar {
+            display: block;
+            margin: 0 auto 20px;
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .medicine-card {
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 200px;
+            text-align: left;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(500deg, #33ADF3, #DAF2FF);
+        }
+
+        .medicine-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .medicine-card h3 {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        .medicine-card p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #144150;
+        }
+
+        .medicine-card button {
+            background-color: hsl(221, 96%, 72%);
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+
+        }
+
+        .medicine-card button:hover {
+            background-color: hsl(221, 100%, 63%);
+        }
+
+        .logo_background-logo {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            object-fit: cover; 
+            opacity: 0.5; 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+        }
+        
+        .LogoWithoutText-logo {
+            position: fixed; 
+            bottom: 20px;
+            left: 10px; 
+            width: 250px; 
+            height: 120px; 
+            z-index: 10; 
+            opacity: 1.0; /
+        }
+        
+        #search-bar, .container, header, footer {
+            position: relative;
+            z-index: 1; 
         }
     </style>
 </head>
 <body>
+    <img src="{% static 'logo_background.png' %}" alt="Background" class="logo_background-logo">
+    <img src="{% static 'LogoWithoutText.png' %}" alt="Logo" class="LogoWithoutText-logo">
 <header>
     <h1 class="company-name">Welcome to RxPress</h1>
     <br>
@@ -25,53 +164,31 @@
             <a href="{% url 'profile_management:account' %}">Account</a>
             <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
             <a href="{% url 'orders:order_view' %}">Order</a>
-            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'homepage:logout_user' %}">Logoout</a>
         </nav>
     </div>
 </header>
 
 <section>
-    <h2 class="subtext">Medicine List</h2>
+    <br>
     <div>
         <input id="search-bar" type="text" placeholder="Search for medicines..." onkeyup="filterMedicines()">
     </div>
+    
 
-    <div class="container"> 
-        <form method="post" action="{% url 'shopping_cart:add_to_cart' %}">
-            {% csrf_token %}
-            <table id="medicine-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Strength</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for medicine in medicines %}
-                        <tr>
-                            <td>{{ medicine.name }}</td>
-                            <td>{{ medicine.description }}</td>
-                            <td>{{ medicine.strength }}</td>
-                            <td>{{ medicine.category }}</td>
-                            <td>₱{{ medicine.price }}</td>
-                            <td><input type="number" name="quantity_{{ medicine.id }}" value="1" min="1" required></td>
-                            <td><input type="checkbox" name="selected_items" value="{{ medicine.id }}"></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>                
-            </table>
-            <br>
-            <div style="text-align: center;">
-                <button type="submit">Add Selected to Cart</button>
-            </div>
-        </form>        
-        <br>
-    </div> 
+    <div class="card-container" id="medicine-container">
+        {% for medicine in medicines %}
+        <div class="medicine-card" data-name="{{ medicine.name }}" data-description="{{ medicine.description }}">
+            <img src="{{ medicine.picture.url }}" alt="{{ medicine.name }}">
+            <h3>{{ medicine.name }}</h3>
+            <p>₱{{ medicine.price }}</p>
+            <p>{{ medicine.category }}</p>
+            <a href="{% url 'homepage:product_details' medicine.id %}">
+                <button>View Details</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 </section>
 
 <script>
@@ -79,22 +196,18 @@
     function filterMedicines() {
         const input = document.getElementById('search-bar');
         const filter = input.value.toLowerCase();
-        const table = document.getElementById('medicine-table');
-        const rows = table.getElementsByTagName('tr');
+        const cards = document.querySelectorAll('.medicine-card');
 
-        for (let i = 1; i < rows.length; i++) { // Skip the header row
-            const cells = rows[i].getElementsByTagName('td');
-            let match = false;
+        cards.forEach(card => {
+            const name = card.getAttribute('data-name').toLowerCase();
+            const description = card.getAttribute('data-description').toLowerCase();
 
-            for (let j = 0; j < cells.length; j++) {
-                if (cells[j].textContent.toLowerCase().includes(filter)) {
-                    match = true;
-                    break;
-                }
+            if (name.includes(filter) || description.includes(filter)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
             }
-
-            rows[i].style.display = match ? '' : 'none';
-        }
+        });
     }
 </script>
 
