@@ -43,9 +43,7 @@
             font-weight: 500;
         }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+      
 
         #cart {
             margin-top: 40px;
@@ -130,7 +128,7 @@
         }
 
         .place-order-btn {
-            background-color: #28a745;
+            background-color: #2784bb;
             color: white;
             padding: 12px 25px;
             font-size: 16px;
@@ -143,12 +141,37 @@
         }
 
         .place-order-btn:hover {
-            background-color: #218838;
+            background-color: #2784bb;
+        }
+
+        .logo_background-logo {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            object-fit: cover; 
+            opacity: 0.5; 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+        }
+        
+        .LogoWithoutText-logo {
+            position: fixed; 
+            bottom: 20px;
+            left: 10px; 
+            width: 250px; 
+            height: 120px; 
+            z-index: 10; 
+            opacity: 1.0; /
         }
     </style>
 </head>
 <body>
-
+    <img src="{% static 'logo_background.png' %}" alt="Background" class="logo_background-logo">
+    <img src="{% static 'LogoWithoutText.png' %}" alt="Logo" class="LogoWithoutText-logo">
 <header>
     <h1 class="logo">CartList</h1>
     <nav>
@@ -156,7 +179,7 @@
         <a href="{% url 'profile_management:account' %}">Account</a>
         <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
         <a href="{% url 'orders:order_view' %}">Order</a>
-        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'shopping_cart:logout_user' %}">Logout</a>
     </nav>
 </header>
 
@@ -180,18 +203,17 @@
                     <tr id="cart-item-{{ cart_item.id }}">
                         <td>{{ cart_item.medicine.name }}</td>
                         <td>
-                            <input type="number" name="quantity_{{ cart_item.medicine.id }}" value="{{ cart_item.quantity }}" min="1" required>
+                            <span>{{ cart_item.quantity }}
                         </td>
-                        <td>₱{{ cart_item.medicine.price|floatformat:2 }} x {{ cart_item.quantity }} = ₱{{ cart_item.total_cost|floatformat:2 }}</td>
+                        <td>₱{{ cart_item.medicine.price|floatformat:2 }}</td>
                         <td>
-                            <form method="post" action="{% url 'shopping_cart:update_cart' item_id=cart_item.id %}" style="display:inline;">
-                                {% csrf_token %}
-                                <button type="submit" class="update-cart-btn">Update</button>
+                            <form>
+                                <button></button>
                             </form>
                             <form method="post" action="{% url 'shopping_cart:remove_from_cart' item_id=cart_item.id %}" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="delete-btn">Delete</button>
-                            </form>
+                            </form>                            
                         </td>
                     </tr>
                     {% endfor %}
@@ -209,8 +231,5 @@
         {% endif %}
     </div>
 </section>
-
-<script src="{% static 'index.js' %}"></script>
-
 </body>
 </html>

@@ -6,10 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile - RxPress</title>
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap">
     <style>
+               body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .company-name {
+            text-align: center;
+            font-size: 2rem;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f0f4f8;
@@ -17,7 +26,6 @@
             padding: 0;
         }
 
-        /* Header Styling */
         header {
             background: linear-gradient(500deg, #33ADF3, #1E5C7F);
             color: white;
@@ -31,21 +39,26 @@
             font-weight: bold;
             margin: 0;
         }
-
-        nav {
-            margin-top: 15px;
-        }
-
+        
         nav a {
-            color: white;
             margin: 0 15px;
             text-decoration: none;
-            font-size: 16px;
+            color: #333;
             font-weight: 500;
+            padding: 5px 10px; /* Add padding for the button effect */
+            border-radius: 5px; /* Round the corners */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+        }
+        
+        nav a:hover {
+            background-color: #33ADF3; /* Add a background color on hover */
+            color: white; /* Change text color on hover */
         }
 
-        nav a:hover {
-            text-decoration: underline;
+        .subtext {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5rem;
         }
 
         /* Edit Profile Container */
@@ -133,8 +146,41 @@
         .cancel-button:hover {
             background-color: #aaa;
         }
+
+        .logo_background-logo {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            object-fit: cover; 
+            opacity: 0.5; 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+        }
+        
+        .LogoWithoutText-logo {
+            position: fixed; 
+            bottom: 20px;
+            left: 10px; 
+            width: 250px; 
+            height: 120px; 
+            z-index: 10; 
+            opacity: 1.0; /
+        }
+        
+        #search-bar, .container, header, footer {
+            position: relative;
+            z-index: 1; 
+        }
+
     </style>
 </head>
+
+<img src="{% static 'onboarding_bg.png' %}" alt="Background" class="logo_background-logo">
+<img src="{% static 'LogoWithoutText.png' %}" alt="Logo" class="LogoWithoutText-logo">
 
 <body>
     <header>
@@ -144,30 +190,20 @@
             <a href="{% url 'profile_management:account' %}">Account</a>
             <a href="{% url 'shopping_cart:cart_view' %}">Shopping Cart</a>
             <a href="{% url 'orders:order_view' %}">Order</a>
-            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'profile_management:logout_user' %}">Logout</a>
         </nav>
     </header>
     <div class="edit-profile-container">
         <h2>Edit Profile</h2>
 
-        {% if messages %}
-            <div id="flash-messages">
-                {% for message in messages %}
-                    <div class="flash-message flash-{{ message.tags }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        <form method="POST" action="{% url 'profile_management:edit_profile' %}">
+        <form method="POST" action="{% url 'profile_management:edit_profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
-
+        
             <div class="form-row">
                 <label for="first_name">First Name:</label>
                 <input type="text" name="first_name" value="{{ form.first_name.value }}" required>
             </div>
-
+        
             <div class="form-row">
                 <label for="last_name">Last Name:</label>
                 <input type="text" name="last_name" value="{{ form.last_name.value }}" required>
@@ -193,11 +229,16 @@
                 <input type="password" name="confirm_password" placeholder="Confirm new password">
             </div>
         
+            <div class="form-row">
+                <label for="profile_picture">Profile Picture:</label>
+                <input type="file" name="profile_picture">
+            </div>
+        
             <div class="button-container">
                 <button type="submit">Save Changes</button>
                 <a href="{% url 'profile_management:account' %}" class="cancel-button">Cancel</a>
             </div>
-        </form>        
+        </form>
     </div>
 </body>
 
