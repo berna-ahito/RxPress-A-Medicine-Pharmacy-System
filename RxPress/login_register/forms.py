@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
-from .models import User # Update to use CustomUser
+from django.contrib.auth.models import User
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'placeholder': 'Username'}))
@@ -24,7 +24,6 @@ class RegisterForm(forms.Form):
 
     def save(self):
         data = self.cleaned_data
-        # Create a new user instance
         user = User(
             first_name=data['first_name'],
             last_name=data['last_name'],

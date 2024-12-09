@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - RxPress</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{% static 'LogoWithoutText.png' %} " alt="Logo"></a>
+            <a href ="#home" style="font-size: 22px;">Home</a>
+            <a href="#who-we-are" style="font-size: 22px;"> Who We Are</a>
+            <a href="#contact-us" style="font-size: 22px;"> Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="home" class="onboarding-screen">
+        <img src="{% static 'LogoWithoutText.png' %}" alt="Logo" class="onboarding-logo">
+        <div class="onboarding-container">
+            <h2 style="font-size: 70px;">Wellness starts with us.</h2>
+            <p style="font-size: 30px;">Your trusted partner in health, offering quality medicines<br> and care at your fingertips.</p>
+            <div class="button-container">
+                <a href="{% url 'login_register:login' %}" class="button login">Login</a>
+                <a href="{% url 'login_register:signup' %}" class="button signup">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Who We Are Section -->
+    <div id="who-we-are" class="who-we-are">
+        <div class="content-container">
+            <h2>Our Vision and Mission</h2>
+            <p><strong>Vision:</strong> To revolutionize the way people access medicines.</p>
+            <p><strong>Mission:</strong> To deliver accessible, affordable, and efficient pharmacy services to everyone.</p>
+        </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div id="contact-us" class="contact-us">
+        <h2>Contact Us</h2>
+        <p>Email: contact@rxpress.com</p>
+        <p>Phone: +123 456 7890</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 RxPress. All rights reserved.
+    </footer>
+</body>
+</html>

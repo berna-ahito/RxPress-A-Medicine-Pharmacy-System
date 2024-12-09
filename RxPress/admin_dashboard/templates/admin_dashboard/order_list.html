@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+    {% load static %}
+    <style>
+       
+
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(500deg, #33ADF3, #1E5C7F);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            padding: 5px 10px; /* Add padding for the button effect */
+            border-radius: 5px; /* Round the corners */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+        }
+        
+        nav a:hover {
+            background-color: #33ADF3; /* Add a background color on hover */
+            color: white; /* Change text color on hover */
+        }
+
+        section {
+            margin: 40px auto;
+            padding: 20px;
+            max-width: 90%;
+            background: linear-gradient(500deg, #EEF4F7, #DAF2FF);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+      
+
+        .btn {
+            background-color: #37789e;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2784bb;
+        }
+        .logo_background-logo {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            object-fit: cover; 
+            opacity: 0.5; 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+        }
+        
+        .LogoWithoutText-logo {
+            position: fixed; 
+            bottom: 20px;
+            left: 10px; 
+            width: 250px; 
+            height: 120px; 
+            z-index: 10; 
+            opacity: 1.0; /
+        }
+        
+        #search-bar, .container, header, footer {
+            position: relative;
+            z-index: 1; 
+        }
+
+
+
+    </style>
+</head>
+
+<img src="{% static 'logo_background.png' %}" alt="Background" class="logo_background-logo">
+<img src="{% static 'LogoWithoutText.png' %}" alt="Logo" class="LogoWithoutText-logo">
+<body>
+    <header>
+        <h1>Order List</h1>
+        <nav>
+            <a href="{% url 'admin_dashboard:medicine_list' %}">Medicine List</a>
+            <a href="{% url 'admin_dashboard:order_list' %}">Orders</a>
+            <a href="{% url 'admin_dashboard:customer_list' %}">Users</a>
+            <a href="{% url 'admin_dashboard:logout_user' %}">Logout</a>
+        </nav>
+    </header>
+
+    <div class="section">   
+        <h3>All Orders</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Total Cost</th>
+                    <th>Created At</th>
+                    <th>Order Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.user.username }}</td>
+                    <td>₱{{ order.total_cost }}</td>
+                    <td>{{ order.created_at }}</td>
+                    <td><a href="{% url 'admin_dashboard:order_details' order.id %}">View Details</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

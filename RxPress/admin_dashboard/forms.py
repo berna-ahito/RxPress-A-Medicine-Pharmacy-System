@@ -4,7 +4,7 @@ from admin_dashboard.models import Medicine
 class MedicineForm(forms.ModelForm):
     class Meta:
         model = Medicine
-        fields = ['name', 'description', 'strength', 'category', 'price', 'quantity'] 
+        fields = ['name', 'description', 'strength', 'category', 'price', 'quantity', 'picture']
         widgets = {
             'name': forms.TextInput(attrs={
                 'placeholder': 'Enter medicine name',
@@ -33,6 +33,10 @@ class MedicineForm(forms.ModelForm):
             }),
             'quantity': forms.NumberInput(attrs={
                 'placeholder': 'Enter quantity',
+                'class': 'form-control',
+                'style': 'font-family: Montserrat Alternates, sans-serif;'
+            }),
+            'medicine_picture': forms.ClearableFileInput(attrs={
                 'class': 'form-control',
                 'style': 'font-family: Montserrat Alternates, sans-serif;'
             }),
